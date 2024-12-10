@@ -29,12 +29,16 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     id,
     degree_id,
     modalidad,
-    lugar,
     capacidad,
-    horas,
+    duracion,
+    name,
     descripcion,
     fecha,
     id_tipo,
+    lugar,
+    facultad,
+    institucion,
+    instructor,
     url,
   } = body as Formacion;
 
@@ -44,7 +48,8 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     !modalidad ||
     !lugar ||
     !capacidad ||
-    !horas ||
+    !duracion ||
+    !name ||
     !descripcion ||
     !fecha ||
     !id_tipo ||
@@ -66,12 +71,16 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       .update({
         degree_id,
         modalidad,
-        lugar,
         capacidad,
-        horas,
+        duracion,
+        name,
         descripcion,
         fecha,
         id_tipo,
+        lugar,
+        facultad,
+        institucion,
+        instructor,
         url,
       })
       .eq("id", id);
@@ -96,12 +105,16 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { error: insertError } = await supabase.from("formaciones").insert({
     degree_id,
     modalidad,
-    lugar,
     capacidad,
-    horas,
+    duracion,
+    name,
     descripcion,
     fecha,
     id_tipo,
+    lugar,
+    facultad,
+    institucion,
+    instructor,
     url,
   });
 

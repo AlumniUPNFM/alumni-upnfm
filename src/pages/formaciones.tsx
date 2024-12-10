@@ -80,11 +80,15 @@ export default function FormacionesMaintenance() {
                   modalidad: "",
                   lugar: "",
                   capacidad: 0,
-                  horas: 0,
+                  duracion: "",
+                  name: "",
                   descripcion: "",
                   fecha: new Date(),
-                  id_tipo: 0,
-                  url: ''
+                  id_tipo: -1,
+                  url: "",
+                  institucion: "",
+                  facultad: "",
+                  instructor: "",
                 }}
                 onSave={(formacion) => {
                   handleSave(formacion);
@@ -98,28 +102,33 @@ export default function FormacionesMaintenance() {
           <TableCaption>Lista con todas las Formaciones.</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Nombre</TableHead>
               <TableHead>Tipo</TableHead>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Descripcion</TableHead>
               <TableHead>Carrera</TableHead>
               <TableHead>Modalidad</TableHead>
               <TableHead>Lugar</TableHead>
               <TableHead>Capacidad</TableHead>
-              <TableHead>Horas</TableHead>
               <TableHead>Fecha</TableHead>
+              <TableHead>Duración</TableHead>
+              <TableHead>Institucion</TableHead>
+              <TableHead>Facultad</TableHead>
+              <TableHead>Instructor</TableHead>
+              <TableHead>URL</TableHead>
               <TableHead>Acciones</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {loading && (
               <TableRow>
-                <TableCell colSpan={9} className="text-center">
+                <TableCell colSpan={14} className="text-center">
                   Cargando...
                 </TableCell>
               </TableRow>
             )}
             {error && (
               <TableRow>
-                <TableCell colSpan={9} className="text-center text-red-500">
+                <TableCell colSpan={14} className="text-center text-red-500">
                   Error: {error}
                 </TableCell>
               </TableRow>

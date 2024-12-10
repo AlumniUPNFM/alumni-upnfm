@@ -8,11 +8,15 @@ export interface Formacion {
   modalidad: string;
   lugar: string;
   capacidad: number;
-  horas: number;
+  duracion: string;
+  name: string;
   descripcion: string;
   fecha: Date;
   id_tipo: number;
   url: string;
+  institucion: string;
+  facultad: string;
+  instructor: string;
   degree?: Degree;
   tipo?: TipoFormacion;
 }

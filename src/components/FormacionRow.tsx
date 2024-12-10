@@ -6,6 +6,7 @@ import { IconPencil, IconTrash } from "@tabler/icons-react";
 import { Formacion } from "@/services/formaciones.types";
 import FormacionForm from "./FormacionForm";
 import { dateToFormat } from "@/lib/date-to-format";
+import Link from "next/link";
 
 interface FormacionRowProps {
   formacion: Formacion;
@@ -22,14 +23,21 @@ export default function FormacionRow({
 
   return (
     <TableRow>
-      <TableCell>{formacion.descripcion}</TableCell>
       <TableCell>{formacion.tipo?.name}</TableCell>
+      <TableCell>{formacion.name}</TableCell>
+      <TableCell>{formacion.descripcion}</TableCell>
       <TableCell>{formacion.degree?.name}</TableCell>
       <TableCell>{formacion.modalidad}</TableCell>
       <TableCell>{formacion.lugar}</TableCell>
       <TableCell>{formacion.capacidad}</TableCell>
-      <TableCell>{formacion.horas}</TableCell>
       <TableCell>{dateToFormat(new Date(formacion.fecha))}</TableCell>
+      <TableCell>{formacion.duracion}</TableCell>
+      <TableCell>{formacion.institucion}</TableCell>
+      <TableCell>{formacion.facultad}</TableCell>
+      <TableCell>{formacion.instructor}</TableCell>
+      <TableCell>
+        <Link className="text-blue-400 hover:underline" href={formacion.url}>{formacion.url}</Link>
+      </TableCell>
       <TableCell>
         <div className="flex gap-2">
           <Button
