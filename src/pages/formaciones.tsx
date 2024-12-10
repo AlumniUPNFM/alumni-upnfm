@@ -34,7 +34,7 @@ export default function FormacionesMaintenance() {
         toast("Formacion guardada correctamente");
         refresh();
       } else {
-        toast("Error al guardar la empresa");
+        toast(`Error al guardar la formación: ${res.message}`);
       }
     } catch (error) {
       console.error("Error al guardar la empresa", error);

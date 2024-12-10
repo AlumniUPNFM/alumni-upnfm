@@ -42,12 +42,9 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     url,
   } = body as Formacion;
 
-  // Validar los datos
+  // Validar los datos, solamente los que no deben ser nulos
   if (
-    !degree_id ||
     !modalidad ||
-    !lugar ||
-    !capacidad ||
     !duracion ||
     !name ||
     !descripcion ||
@@ -58,7 +55,8 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).json({
       isSuccess: false,
       data: null,
-      message: "Todos los campos son obligatorios.",
+      message:
+        "Los campos de: Modalidad, Duración, Nombre, Descripción, Fecha, Tipo y URL son obligatorios",
     });
   }
 
