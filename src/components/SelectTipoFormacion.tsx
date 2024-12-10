@@ -27,17 +27,18 @@ export default function SelectTipoFormacion({
   const { tiposFormaciones, loading, error } = useTiposFormaciones();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(-1);
-  // const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (idTipoFormacion) {
-      const degree = tiposFormaciones.find((d) => d.id === idTipoFormacion);
-      if (degree) {
-        setValue(degree.id);
-        onSelect(degree.id);
+    if (idTipoFormacion && tiposFormaciones) {
+      const tipo = tiposFormaciones.find((t) => t.id === idTipoFormacion);
+      if (tipo) {
+        setValue(tipo.id);
+        onSelect(tipo.id);
       }
     }
-  }, [tiposFormaciones, idTipoFormacion]);
+  }, [tiposFormaciones, idTipoFormacion, onSelect]);
+
+  const selected = tiposFormaciones?.find((t) => t.id === value);
 
   return !tiposFormaciones || loading || error ? (
     <Button variant="outline" disabled>
@@ -50,37 +51,38 @@ export default function SelectTipoFormacion({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between"
+          className="justify-between w-full"
         >
-          {value
-            ? tiposFormaciones.find((degree) => degree.id === value)?.name
-            : "Seleccciona..."}
+          {selected ? selected.name : "Seleccionar..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className=" p-0">
+      <PopoverContent className="p-0 w-full">
         <Command>
-          <CommandInput placeholder="Buscar carrera..." />
+          <CommandInput placeholder="Buscar tipo de formación..." />
           <CommandList>
             <CommandEmpty>No se encontraron registros.</CommandEmpty>
             <CommandGroup>
-              {tiposFormaciones.map((degree) => (
+              {tiposFormaciones.map((tipo) => (
                 <CommandItem
-                  key={degree.id}
-                  value={degree.id.toString()}
+                  key={tipo.id}
+                  value={tipo.name} // Usar el name para permitir filtrar por texto
                   onSelect={(currentValue) => {
-                    setValue(Number(currentValue));
-                    onSelect(Number(currentValue));
+                    const selectedTipo = tiposFormaciones.find((t) => t.name === currentValue);
+                    if (selectedTipo) {
+                      setValue(selectedTipo.id);
+                      onSelect(selectedTipo.id);
+                    }
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === degree.id ? "opacity-100" : "opacity-0"
+                      value === tipo.id ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {degree.name}
+                  {tipo.name}
                 </CommandItem>
               ))}
             </CommandGroup>

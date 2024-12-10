@@ -24,21 +24,22 @@ export default function SelectEmpresa({ onSelect, idEmpresa }: Props) {
   const { empresas, loading, error } = useEmpresas();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(-1);
-  // const [search, setSearch] = useState("");
 
   useEffect(() => {
-    if (idEmpresa) {
-      const degree = empresas.find((degree) => degree.id === idEmpresa);
-      if (degree) {
-        setValue(degree.id);
-        onSelect(degree.id);
+    if (idEmpresa && empresas) {
+      const empresa = empresas.find((e) => e.id === idEmpresa);
+      if (empresa) {
+        setValue(empresa.id);
+        onSelect(empresa.id);
       }
     }
-  }, [empresas, idEmpresa]);
+  }, [empresas, idEmpresa, onSelect]);
+
+  const selected = empresas?.find((e) => e.id === value);
 
   return !empresas || loading || error ? (
     <Button variant="outline" disabled>
-      Cargando grados...
+      Cargando empresas...
     </Button>
   ) : (
     <Popover open={open} onOpenChange={setOpen}>
@@ -47,37 +48,40 @@ export default function SelectEmpresa({ onSelect, idEmpresa }: Props) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between"
+          className="justify-between w-full"
         >
-          {value
-            ? empresas.find((degree) => degree.id === value)?.name
-            : "Select empresa..."}
+          {selected ? selected.name : "Seleccionar empresa..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className=" p-0">
+      <PopoverContent className="p-0 w-full">
         <Command>
-          <CommandInput placeholder="Buscar carrera..." />
+          <CommandInput placeholder="Buscar empresa..." />
           <CommandList>
             <CommandEmpty>No se encontraron empresas.</CommandEmpty>
             <CommandGroup>
-              {empresas.map((degree) => (
+              {empresas.map((empresa) => (
                 <CommandItem
-                  key={degree.id}
-                  value={degree.id.toString()}
+                  key={empresa.id}
+                  value={empresa.name} // Usar name para permitir filtrado por texto
                   onSelect={(currentValue) => {
-                    setValue(Number(currentValue));
-                    onSelect(Number(currentValue));
+                    const selectedEmpresa = empresas.find(
+                      (e) => e.name === currentValue
+                    );
+                    if (selectedEmpresa) {
+                      setValue(selectedEmpresa.id);
+                      onSelect(selectedEmpresa.id);
+                    }
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === degree.id ? "opacity-100" : "opacity-0"
+                      value === empresa.id ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {degree.name}
+                  {empresa.name}
                 </CommandItem>
               ))}
             </CommandGroup>
