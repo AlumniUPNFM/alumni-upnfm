@@ -1,5 +1,6 @@
 import { dateToFormat } from "@/lib/date-to-format";
 import { Formacion } from "@/services/formaciones.types";
+import { CalendarIcon, ClockIcon, ExternalLinkIcon, UserIcon, UsersIcon } from "lucide-react";
 import Link from "next/link";
 
 interface Props {
@@ -8,49 +9,121 @@ interface Props {
 
 export default function FormacionDetail({ formacion }: Props) {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden font-montserrat">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden font-montserrat text-gray-800">
       {/* Encabezado */}
-      <div className="bg-primary text-white text-center p-4">
-        <h2 className="text-2xl font-bold">{formacion.descripcion}</h2>
+      <div className="bg-primary text-white p-6">
+        <h2 className="text-3xl font-bold tracking-tight">{formacion.name}</h2>
+        {formacion.descripcion && (
+          <p className="text-white/90 text-sm mt-2 leading-relaxed">
+            {formacion.descripcion}
+          </p>
+        )}
       </div>
-      {/* Cuerpo */}
-      <div className="p-6 space-y-4">
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Facultad:</span>
-          <span>{formacion.degree?.name}</span>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Modalidad:</span>
-          <span>{formacion.modalidad}</span>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Lugar:</span>
-          <span>{formacion.lugar}</span>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Capacidad:</span>
-          <span>{formacion.capacidad} personas</span>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Duración:</span>
-          <span>{formacion.horas} horas</span>
-        </div>
-        <div className="flex items-center">
-          <span className="font-semibold w-32">Fecha:</span>
-          <span>{dateToFormat(new Date(formacion.fecha))}</span>
-        </div>
+
+      {/* Chips para Tipo, Carrera, Modalidad */}
+      <div className="p-6 pb-0 flex flex-wrap gap-2">
+        {formacion.tipo?.name && (
+          <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-medium text-gray-800">
+            {formacion.tipo.name}
+          </span>
+        )}
+        {formacion.degree?.name && (
+          <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-medium text-gray-800">
+            {formacion.degree.name}
+          </span>
+        )}
+        {formacion.modalidad && (
+          <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm font-medium text-gray-800">
+            {formacion.modalidad}
+          </span>
+        )}
       </div>
+
+      {/* Información principal (Fecha, Duración, Lugar, Capacidad) */}
+      <div className="p-6">
+        <ul className="space-y-2 text-sm">
+          {formacion.fecha && (
+            <li className="flex items-center space-x-2">
+              <CalendarIcon className="h-5 w-5 text-gray-500" />
+              <span>{dateToFormat(new Date(formacion.fecha))}</span>
+            </li>
+          )}
+          {formacion.duracion && (
+            <li className="flex items-center space-x-2">
+              <ClockIcon className="h-5 w-5 text-gray-500" />
+              <span>{formacion.duracion}</span>
+            </li>
+          )}
+          {formacion.lugar && (
+            <li className="flex items-center space-x-2">
+              {/* <LocationMarkerIcon className="h-5 w-5 text-gray-500" /> */}
+              <span>{formacion.lugar}</span>
+            </li>
+          )}
+          {typeof formacion.capacidad === "number" && (
+            <li className="flex items-center space-x-2">
+              <UsersIcon className="h-5 w-5 text-gray-500" />
+              <span>{formacion.capacidad} personas</span>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      {/* Información adicional (Institución, Facultad, Instructor) */}
+      <div className="p-6 pt-0">
+        <ul className="space-y-2 text-sm">
+          {formacion.institucion && (
+            <li className="flex items-center space-x-2">
+              {/* <AcademicCapIcon className="h-5 w-5 text-gray-500" /> */}
+              <span>{formacion.institucion}</span>
+            </li>
+          )}
+          {formacion.facultad && (
+            <li className="flex items-center space-x-2">
+              {/* <BuildingLibraryIcon className="h-5 w-5 text-gray-500" /> */}
+              <span>{formacion.facultad}</span>
+            </li>
+          )}
+          {formacion.instructor && (
+            <li className="flex items-center space-x-2">
+              <UserIcon className="h-5 w-5 text-gray-500" />
+              <span>{formacion.instructor}</span>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      {/* URL */}
+      {formacion.url && (
+        <div className="p-6 pt-0">
+          <div className="flex items-center space-x-2 text-sm text-primary hover:underline">
+            <ExternalLinkIcon className="h-5 w-5 text-gray-500" />
+            <Link href={formacion.url} target="_blank" rel="noopener noreferrer">
+              {formacion.url}
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Información secundaria (ID, Created_at) */}
+      <div className="p-6 pt-0 text-xs text-gray-500 space-x-4">
+        <span>ID: {formacion.id}</span>
+        <span>Creado: {formacion.created_at ? dateToFormat(new Date(formacion.created_at)) : "N/D"}</span>
+      </div>
+
       {/* Pie de página */}
-      <div className="bg-gray-100 p-4 flex justify-end">
-        <Link
-          href={formacion.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-6 py-2 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors duration-200"
-        >
-          Más Info
-        </Link>
-      </div>
+      {formacion.url && (
+        <div className="bg-gray-100 p-4 flex justify-end">
+          <Link
+            href={formacion.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2 bg-primary text-white font-semibold rounded-full hover:bg-primary-dark transition-colors duration-200"
+          >
+            Más Info
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
