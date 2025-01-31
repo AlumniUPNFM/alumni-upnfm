@@ -31,46 +31,46 @@ export default function DesarrolloProfesional() {
           <DesarrolloProfesionalItem
             title="Diplomados"
             image="/children.webp"
-            heightClass="h-44"
+            heightClass="h-64"
             idTipo={1}
           />
           <DesarrolloProfesionalItem
             title="Certificados"
             image="/children.webp"
-            heightClass="h-44"
+            heightClass="h-64"
             idTipo={2}
           />
         </div>
         <div className="col-span-3 xl:col-span-1 flex flex-col gap-4">
           <div className="col-span-3 xl:col-span-1 flex gap-4">
           <DesarrolloProfesionalItem
-            title="Conferencias"
-            image="/book.webp"
-            heightClass="h-44"
+            title=""
+            image="/Logo-Conferencias-Alumni-UPNFM.webp"
+            heightClass="h-64"
             widthClass="w-64"
             idTipo={3}
           />
           <DesarrolloProfesionalItem
-            title="Talleres"
-            image="/book.webp"
-            heightClass="h-44"
+            title=""
+            image="/Logo-Talleres-Alumni-UPNFM.webp"
+            heightClass="h-64"
             widthClass="w-64"
             idTipo={4}
           />
           </div>
           <div className="col-span-3 xl:col-span-1 flex gap-4">
           <DesarrolloProfesionalItem
-            title="Cursos"
-            image="/book.webp"
-            heightClass="h-44"
+            title=""
+            image="/Logo-Cursos-Alumni-UPNFM.webp"
+            heightClass="h-64"
             widthClass="w-64"
             idTipo={5}
           />
           <DesarrolloProfesionalItem
             title="Becas"
             image="/book.webp"
-            heightClass="h-44"
-            widthClass="w-64"
+            heightClass="h-64"
+            widthClass="w-60"
             idTipo={6}
           />
           </div>
@@ -79,7 +79,7 @@ export default function DesarrolloProfesional() {
           <DesarrolloProfesionalItem
             title="Post-Grados"
             image="/books-w-headset.webp"
-            heightClass="h-[23rem]"
+            heightClass="h-[34rem]"
             idTipo={7}
           />
         </div>

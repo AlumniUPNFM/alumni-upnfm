@@ -115,7 +115,6 @@ const Header = () => {
             </svg>
             <HeaderButton
               isAnchor={true}
-              isDisabled={true}
               selected={isWork}
               href="/"
               text="Trabajo"

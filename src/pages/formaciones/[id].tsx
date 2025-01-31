@@ -22,7 +22,7 @@ export default function Formaciones() {
     3: "/Logo-Conferencias-Alumni-UPNFM.webp", // Logo de Conferencias
     4: "/Logo-Talleres-Alumni-UPNFM.webp", // Logo de Talleres
     5: "/Logo-Cursos-Alumni-UPNFM.webp", // Logo de Cursos
-    6: "/Logo_USAID.webp", // Logo de Becas
+    6: "/Logo_VRI.webp", // Logo de Becas
     7: "/Logo_DPG.webp", // Logo de Post-Grados
   };
 

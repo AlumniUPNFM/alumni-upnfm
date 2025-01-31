@@ -17,7 +17,7 @@ export default function DesarrolloProfesionalItem({
   widthClass,
 }: Props) {
   return (
-    <article className="relative group">
+    <article className="relative group border border-solid border-custom-gray rounded-sm p-2">
       <Link href={`formaciones/${idTipo}`}>
         <Image
           src={image}
