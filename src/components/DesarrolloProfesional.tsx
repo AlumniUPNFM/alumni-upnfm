@@ -70,7 +70,7 @@ export default function DesarrolloProfesional() {
             title="Becas"
             image="/book.webp"
             heightClass="h-64"
-            widthClass="w-60"
+            widthClass="w-56"
             idTipo={6}
           />
           </div>
