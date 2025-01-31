@@ -45,14 +45,14 @@ export default function DesarrolloProfesional() {
           <div className="col-span-3 xl:col-span-1 flex gap-4">
           <DesarrolloProfesionalItem
             title=""
-            image="/Logo-Conferencias-Alumni-UPNFM.webp"
+            image="/Confe2_Logo.webp"
             heightClass="h-64"
             widthClass="w-64"
             idTipo={3}
           />
           <DesarrolloProfesionalItem
             title=""
-            image="/Logo-Talleres-Alumni-UPNFM.webp"
+            image="/Taller2_Logo.webp"
             heightClass="h-64"
             widthClass="w-64"
             idTipo={4}
@@ -61,14 +61,14 @@ export default function DesarrolloProfesional() {
           <div className="col-span-3 xl:col-span-1 flex gap-4">
           <DesarrolloProfesionalItem
             title=""
-            image="/Logo-Cursos-Alumni-UPNFM.webp"
+            image="/Cursos2_Logo.webp"
             heightClass="h-64"
             widthClass="w-64"
             idTipo={5}
           />
           <DesarrolloProfesionalItem
             title=""
-            image="/Logo-Cursos-Alumni-UPNFM.webp"
+            image="/Cursos2_Logo.webp"
             heightClass="h-64"
             widthClass="w-64"
             idTipo={6}
