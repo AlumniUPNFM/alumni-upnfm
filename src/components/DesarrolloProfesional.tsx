@@ -67,10 +67,10 @@ export default function DesarrolloProfesional() {
             idTipo={5}
           />
           <DesarrolloProfesionalItem
-            title="Becas"
-            image="/book.webp"
+            title=""
+            image="/Logo-Cursos-Alumni-UPNFM.webp"
             heightClass="h-64"
-            widthClass="w-56"
+            widthClass="w-64"
             idTipo={6}
           />
           </div>
