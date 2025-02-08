@@ -26,63 +26,39 @@ export default function DesarrolloProfesional() {
           </Link>
         </header>
       )}
-      <section className="grid grid-cols-3 mt-12 gap-4 font-montserrat">
-        <div className="col-span-3 xl:col-span-1 flex flex-col gap-4">
-          <DesarrolloProfesionalItem
-            title="Diplomados"
-            image="/children.webp"
-            heightClass="h-64"
+      <section className="grid grid-rows-2 mt-12 gap-4 font-montserrat">
+        <div className="flex gap-4 justify-center">
+        <DesarrolloProfesionalItem
+            image="/UPNFM-Diplomados-Alumni.webp"
             idTipo={1}
           />
-          <DesarrolloProfesionalItem
-            title="Certificados"
-            image="/children.webp"
-            heightClass="h-64"
+            <DesarrolloProfesionalItem
+            image="/UPNFM-Certificado-Alumni.webp"
             idTipo={2}
           />
-        </div>
-        <div className="col-span-3 xl:col-span-1 flex flex-col gap-4">
-          <div className="col-span-3 xl:col-span-1 flex gap-4">
           <DesarrolloProfesionalItem
-            title=""
-            image="/Confe2_Logo.webp"
-            heightClass="h-64"
-            widthClass="w-64"
-            idTipo={3}
-          />
-          <DesarrolloProfesionalItem
-            title=""
-            image="/Taller2_Logo.webp"
-            heightClass="h-64"
-            widthClass="w-64"
-            idTipo={4}
-          />
-          </div>
-          <div className="col-span-3 xl:col-span-1 flex gap-4">
-          <DesarrolloProfesionalItem
-            title=""
-            image="/Cursos2_Logo.webp"
-            heightClass="h-64"
-            widthClass="w-64"
-            idTipo={5}
-          />
-          <DesarrolloProfesionalItem
-            title=""
-            image="/Cursos2_Logo.webp"
-            heightClass="h-64"
-            widthClass="w-64"
+            image="/UPNFM-Becas-Alumni.webp"
             idTipo={6}
           />
-          </div>
-        </div>
-        <div className="col-span-3 xl:col-span-1 flex flex-col gap-4">
           <DesarrolloProfesionalItem
-            title="Post-Grados"
-            image="/books-w-headset.webp"
-            heightClass="h-[34rem]"
+            image="/UPNFM-Postgrado-Alumni.webp"
             idTipo={7}
           />
         </div>
+        <div className="flex gap-4 justify-center">
+        <DesarrolloProfesionalItem
+            image="/Cursos2_Logo.webp"
+            idTipo={5}
+          />
+          <DesarrolloProfesionalItem
+            image="/Taller2_Logo.webp"
+            idTipo={4}
+          />
+          <DesarrolloProfesionalItem
+            image="/Confe2_Logo.webp"
+            idTipo={3}
+          />
+          </div>
       </section>
     </>
   );
