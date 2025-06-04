@@ -1,3 +1,11 @@
+/**
+ * @fileoverview Página de Perfiles - Lista y filtrado de perfiles de egresados
+ *
+ * Esta página permite explorar y filtrar perfiles de egresados por carrera, mostrando la información relevante
+ * de cada usuario en un entorno visual profesional, corporativo y consistente con el resto de la aplicación.
+ * Utiliza un diseño plano, con degradados sutiles y una jerarquía visual clara.
+ */
+
 "use client"; // Necesario para usar hooks en componentes de Next.js
 
 import MainLayout from "@/layouts/MainLayout";
@@ -18,6 +26,11 @@ import { User } from "@/types/types";
 import { useEffect, useState } from "react";
 import DegreeComponent from "@/components/Degree";
 
+/**
+ * @component Profiles
+ * @description Página principal para visualizar y filtrar perfiles de egresados
+ * @returns {JSX.Element} Página de perfiles
+ */
 export default function Profiles() {
   const [profiles, setProfiles] = useState<User[]>([]);
   const [profilesFiltered, setProfilesFiltered] = useState<User[]>([]);
@@ -74,10 +87,17 @@ export default function Profiles() {
 
   return (
     <MainLayout>
-      <main className="flex-flex-col gap-6 font-montserrat">
-        <div className="grid grid-cols-12 gap-2">
-          <aside className="col-span-12 xl:col-span-3 flex flex-col gap-2 text-custom-black rounded-3xl h-fit">
-            <p className="p-2 justify-center items-center flex text-xl font-semibold">
+      <section className="max-w-7xl mx-auto py-10 px-4 font-montserrat">
+        <header className="mb-8 flex items-center gap-3">
+          <div className="bg-gradient-to-br from-custom-green/5 to-custom-green/10 p-2 rounded-lg">
+            <svg className="w-6 h-6 text-custom-green" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">Perfiles de Egresados</h1>
+        </header>
+        <div className="grid grid-cols-12 gap-6">
+          {/* Sidebar de carreras */}
+          <aside className="col-span-12 xl:col-span-3 flex flex-col gap-2 rounded-2xl h-fit bg-gradient-to-br from-gray-50/50 to-gray-50 border border-gray-100 p-4">
+            <p className="mb-2 justify-center items-center flex text-lg font-semibold text-custom-green">
               Filtrar por carreras
             </p>
             <Carrera
@@ -100,10 +120,11 @@ export default function Profiles() {
               />
             ))}
           </aside>
-          <div className="col-span-12 xl:col-span-9 grid grid-cols-12 gap-2">
+          {/* Grid de perfiles */}
+          <div className="col-span-12 xl:col-span-9 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             {profilesFiltered.map(({ dni, names, last_names, degree }, idx) => (
               <Perfil
-                className="col-span-12 md:col-span-6 xl:col-span-3"
+                className="w-full h-max"
                 carrera={degree?.name || "N/A"}
                 dni={dni}
                 lastNames={last_names}
@@ -114,10 +135,8 @@ export default function Profiles() {
           </div>
         </div>
         {/* Paginación */}
-        {
-          // Si no se ajusta el limite de perfiles por pagina y está en la primera página
-          // no se muestra la paginación
-          !(profiles.length < limit && currentPage === 1) && (
+        {!(profiles.length < limit && currentPage === 1) && (
+          <div className="mt-8 flex justify-center">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
@@ -146,9 +165,9 @@ export default function Profiles() {
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
-          )
-        }
-      </main>
+          </div>
+        )}
+      </section>
     </MainLayout>
   );
 }
