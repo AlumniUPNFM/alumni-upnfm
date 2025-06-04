@@ -54,22 +54,33 @@ export default function Page() {
   });
 
   const [newImage, setNewImage] = useState<string | null>(null);
-
   const [loading, setLoading] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const dataUser = JSON.parse(
-      sessionStorage.getItem(DATA_KEY_USER) || "{}"
-    ) as User | null;
+    const checkAuth = () => {
+      try {
+        const dataUser = JSON.parse(
+          sessionStorage.getItem(DATA_KEY_USER) || "{}"
+        ) as User | null;
 
-    if (!dataUser) {
-      router.push("/login");
-      return;
-    }
+        if (!dataUser || !dataUser.dni) {
+          router.push("/login");
+          return;
+        }
 
-    setUser(dataUser);
-    setUserData(dataUser);
-  }, []);
+        setUser(dataUser);
+        setUserData(dataUser);
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+        router.push("/login");
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    checkAuth();
+  }, [router]);
 
   const handleChangeOnInput = (
     type: CHANGE_TYPES,
@@ -107,8 +118,14 @@ export default function Page() {
 
   return (
     <MainLayout>
-      {!user ? (
-        <h1>Cargando...</h1>
+      {authLoading ? (
+        <div className="flex justify-center items-center min-h-[50vh]">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+        </div>
+      ) : !user ? (
+        <div className="flex justify-center items-center min-h-[50vh]">
+          <p className="text-red-500">No autorizado. Redirigiendo al login...</p>
+        </div>
       ) : (
         <main className="flex flex-col gap-2 mx-auto max-w-xs">
           <div className="grid w-full justify-center items-center gap-1.5">

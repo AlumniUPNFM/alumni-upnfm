@@ -23,6 +23,7 @@ export default function Register() {
     dni: "",
     names: "",
     lastNames: "",
+    email: "",
     degreeId: -1,
     password: "",
     confirmPassword: "",
@@ -53,8 +54,10 @@ export default function Register() {
       !formData.dni ||
       !formData.names ||
       !formData.lastNames ||
+      !formData.email ||
       !formData.password ||
-      !formData.confirmPassword
+      !formData.confirmPassword ||
+      formData.degreeId === -1
     ) {
       setMessage("Todos los campos son obligatorios.");
       setError(true);
@@ -67,6 +70,12 @@ export default function Register() {
       return false;
     }
 
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setMessage("Por favor, ingresa un correo electrónico válido.");
+      setError(true);
+      return false;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setMessage("Las contraseñas no coinciden.");
       setError(true);
@@ -75,12 +84,6 @@ export default function Register() {
 
     if (formData.password.length < 8) {
       setMessage("La contraseña debe tener al menos 8 caracteres.");
-      setError(true);
-      return false;
-    }
-
-    if (formData.degreeId === -1) {
-      setMessage("Selecciona una carrera.");
       setError(true);
       return false;
     }
@@ -105,6 +108,7 @@ export default function Register() {
           dni: formData.dni,
           names: formData.names,
           last_names: formData.lastNames,
+          email: formData.email,
           password: formData.password,
           degree_id: formData.degreeId,
         }),
@@ -175,6 +179,17 @@ export default function Register() {
                 value={formData.lastNames}
                 onChange={handleChange}
                 placeholder="Perez Hernández"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Correo Electrónico</Label>
+              <Input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="correo@ejemplo.com"
                 required
               />
             </div>

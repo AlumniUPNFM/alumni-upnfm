@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +30,39 @@ export default function Login() {
     dni: "",
     password: "",
   });
+
+  const handleForgotPassword = async () => {
+    if (!form.dni) {
+      toast.error("Por favor ingrese su DNI para recuperar su contraseña.");
+      return;
+    }
+
+    if (form.dni.length !== 13) {
+      toast.error("El DNI debe tener 13 dígitos.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/forgot-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ dni: form.dni }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al procesar la solicitud");
+      }
+
+      toast.success("Se ha enviado una nueva contraseña a su correo electrónico.");
+    } catch (error) {
+      toast.error("Error al procesar su solicitud. Por favor, intente nuevamente.");
+      console.error("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,6 +188,15 @@ export default function Login() {
               disabled={loading}
             >
               {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+            </Button>
+            <Button
+              type="button"
+              variant="link"
+              className="w-full text-sm text-gray-600 hover:text-primary"
+              onClick={handleForgotPassword}
+              disabled={loading}
+            >
+              ¿Olvidaste tu contraseña?
             </Button>
           </form>
           <p className="text-center text-sm mt-4">

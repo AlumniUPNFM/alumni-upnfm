@@ -40,7 +40,11 @@ const Header = () => {
   const handleLogout = () => {
     removeDataFromSessionStorage();
     setUserLogged(null);
-    router.refresh();
+    if (currentPath === "/profile-maintenance") {
+      router.push("/");
+    } else {
+      router.refresh();
+    }
   };
 
   return (
