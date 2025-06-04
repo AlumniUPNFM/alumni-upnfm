@@ -24,17 +24,16 @@ interface Props {
 export default function SelectDegree({ onSelect, idDegree }: Props) {
   const { degrees, loading, error } = useDegrees();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState<number>(-1);
+  const [value, setValue] = useState<number>(idDegree || -1);
 
   useEffect(() => {
     if (idDegree && degrees) {
       const degree = degrees.find((degree) => degree.id === idDegree);
       if (degree) {
         setValue(degree.id);
-        onSelect(degree.id);
       }
     }
-  }, [degrees, idDegree, onSelect]);
+  }, [degrees, idDegree]);
 
   const selectedDegree = degrees?.find((degree) => degree.id === value);
 
@@ -55,7 +54,7 @@ export default function SelectDegree({ onSelect, idDegree }: Props) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="p-0 w-full">
+      <PopoverContent className="w-[200px] p-0">
         <Command>
           <CommandInput placeholder="Buscar carrera..." />
           <CommandList>
@@ -64,9 +63,8 @@ export default function SelectDegree({ onSelect, idDegree }: Props) {
               {degrees.map((degree) => (
                 <CommandItem
                   key={degree.id}
-                  value={degree.name} // Usamos el nombre para filtrar por texto
+                  value={degree.name}
                   onSelect={(currentValue) => {
-                    // currentValue es el nombre seleccionado
                     const selected = degrees.find((d) => d.name === currentValue);
                     if (selected) {
                       setValue(selected.id);

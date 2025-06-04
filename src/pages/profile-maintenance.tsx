@@ -285,6 +285,13 @@ export default function Page() {
           <Button disabled={loading} onClick={handleSubmit}>
             Guardar
           </Button>
+          <Button
+            variant="outline"
+            onClick={() => router.push("/change-password")}
+            className="w-full"
+          >
+            Cambiar Contraseña
+          </Button>
         </main>
       )}
     </MainLayout>
