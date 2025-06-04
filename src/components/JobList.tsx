@@ -7,6 +7,7 @@
  * especial para administradores con acceso a la gestión de ofertas.
  */
 
+import { useState } from "react";
 import { useTrabajos } from "@/hooks/get-trabajos";
 import { useDegrees } from "@/hooks/get-degrees";
 import OfertaTrabajo from "@/components/OfertaTrabajo";
@@ -44,6 +45,10 @@ export default function JobList({ user }: JobListProps) {
     loading: loadingDegrees,
     error: errorDegrees,
   } = useDegrees();
+
+  // Estado para mostrar solo las primeras 7 carreras o todas
+  const [showAllDegrees, setShowAllDegrees] = useState(false);
+  const displayedDegrees = showAllDegrees ? degrees : degrees?.slice(0, 7);
 
   return (
     <section className="my-12 font-montserrat">
@@ -93,16 +98,26 @@ export default function JobList({ user }: JobListProps) {
                 Error al cargar las carreras
               </p>
             ) : (
-              <div className="space-y-3">
-                {degrees?.map(({ name, image_url: img, ofertas }, idx) => (
-                  <Degree
-                    key={idx}
-                    title={name}
-                    img={img}
-                    ofertas={ofertas?.length ?? 0}
-                  />
-                ))}
-              </div>
+              <>
+                <div className="space-y-3">
+                  {displayedDegrees?.map(({ name, image_url: img, ofertas }, idx) => (
+                    <Degree
+                      key={idx}
+                      title={name}
+                      img={img}
+                      ofertas={ofertas?.length ?? 0}
+                    />
+                  ))}
+                </div>
+                {degrees && degrees.length > 7 && (
+                  <button
+                    className="mt-4 w-full text-custom-green font-medium py-2 rounded-lg hover:bg-custom-green/10 transition-colors duration-200"
+                    onClick={() => setShowAllDegrees((prev) => !prev)}
+                  >
+                    {showAllDegrees ? "Ver menos" : "Ver más"}
+                  </button>
+                )}
+              </>
             )}
           </div>
         </aside>
