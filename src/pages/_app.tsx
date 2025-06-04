@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
+import { FloatingContactButton } from "@/components/FloatingContactButton";
 
 const montserratFont = localFont({
   src: "./fonts/MontserratVF.woff2",
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <main className={`${montserratFont.variable}`}>
       <Component {...pageProps} />
+      <FloatingContactButton />
       <Toaster />
     </main>
   );
