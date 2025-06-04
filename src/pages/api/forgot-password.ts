@@ -1,16 +1,17 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { supabase } from "@/lib/supabase-client";
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer";
 
 function generateRandomPassword(length: number = 12): string {
-  const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+  const charset =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
   let password = "";
-  
+
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * charset.length);
     password += charset[randomIndex];
   }
-  
+
   return password;
 }
 
@@ -31,9 +32,9 @@ export default async function handler(
 
     // Buscar usuario por DNI
     const { data: user, error: userError } = await supabase
-      .from('users')
-      .select('*')
-      .eq('dni', dni)
+      .from("users")
+      .select("*")
+      .eq("dni", dni)
       .single();
 
     if (userError || !user) {
@@ -44,11 +45,11 @@ export default async function handler(
     const temporaryPassword = generateRandomPassword();
 
     // Actualizar contraseña usando el procedimiento almacenado
-    const { error: updateError } = await supabase.rpc('update_user_password', {
+    const { error: updateError } = await supabase.rpc("update_user_password", {
       p_props: {
         dni: dni,
-        password: temporaryPassword
-      }
+        password: temporaryPassword,
+      },
     });
 
     if (updateError) {
@@ -57,7 +58,7 @@ export default async function handler(
 
     // Enviar correo con la nueva contraseña
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: "gmail",
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
@@ -66,8 +67,8 @@ export default async function handler(
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
-      to: user.email,
-      subject: 'Recuperación de contraseña - Alumni UPN',
+      to: user.email || "alumniupnfm@gmail.com",
+      subject: "Recuperación de contraseña - Alumni UPN",
       html: `
         <h2>Recuperación de contraseña</h2>
         <p>Hola ${user.name},</p>
@@ -89,4 +90,4 @@ export default async function handler(
       message: "Error al procesar la solicitud de recuperación de contraseña",
     });
   }
-} 
+}
