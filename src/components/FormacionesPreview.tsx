@@ -6,6 +6,16 @@ interface Props {
   gridCols?: string;
 }
 
+// Fisher-Yates shuffle algorithm
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const FormacionesPreview: React.FC<Props> = ({ gridCols = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" }) => {
   const { formaciones, loading, error } = useFormaciones();
 
@@ -29,9 +39,8 @@ const FormacionesPreview: React.FC<Props> = ({ gridCols = "grid-cols-1 sm:grid-c
 
   return (
     <div className={`grid ${gridCols} gap-4`}>
-      {formaciones
-        .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
-        .slice(0, 4)
+      {shuffleArray(formaciones)
+        .slice(0, 8)
         .map((formacion) => (
           <div
             key={formacion.id}

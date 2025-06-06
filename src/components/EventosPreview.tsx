@@ -21,15 +21,28 @@ const EventosPreview: React.FC<Props> = ({ gridCols = "grid-cols-1 sm:grid-cols-
       </div>
     );
   }
-  if (!eventos || eventos.length === 0) {
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const futureEventos = eventos?.filter(evento => {
+    const eventDate = new Date(evento.fecha);
+    eventDate.setHours(0, 0, 0, 0);
+    return eventDate >= today;
+  });
+
+  if (!futureEventos || futureEventos.length === 0) {
     return (
-      <div className="text-center text-custom-gray p-4">No hay eventos próximos.</div>
+      <div className="text-center p-8 bg-gradient-to-r from-primary/5 to-primary/10 rounded-lg border border-primary/10">
+        <h3 className="text-xl font-bold text-primary mb-2">No hay eventos próximos</h3>
+        <p className="text-custom-gray">¡Mantente atento a nuestras próximas actividades!</p>
+      </div>
     );
   }
 
   return (
     <div className={`grid ${gridCols} gap-4`}>
-      {eventos
+      {futureEventos
         .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
         .slice(0, 4)
         .map((evento) => (
