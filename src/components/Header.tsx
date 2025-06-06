@@ -131,13 +131,15 @@ const Header = (
               text="Inicio"
               styleClass="w-full xl:w-max"
             />
-            <HeaderButton
-              isAnchor={true}
-              selected={isWork}
-              href="/work"
-              text="Trabajo"
-              styleClass="w-full xl:w-max"
-            />
+            {userLogged && (
+              <HeaderButton
+                isAnchor={true}
+                selected={isWork}
+                href="/work"
+                text="Trabajo"
+                styleClass="w-full xl:w-max"
+              />
+            )}
             <HeaderButton
               isAnchor={true}
               selected={isCalendar}

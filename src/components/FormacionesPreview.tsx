@@ -2,7 +2,11 @@ import React from "react";
 import { useFormaciones } from "@/hooks/get-formaciones";
 import { dateToFormat } from "@/lib/date-to-format";
 
-const FormacionesPreview: React.FC = () => {
+interface Props {
+  gridCols?: string;
+}
+
+const FormacionesPreview: React.FC<Props> = ({ gridCols = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" }) => {
   const { formaciones, loading, error } = useFormaciones();
 
   if (loading) {
@@ -24,7 +28,7 @@ const FormacionesPreview: React.FC = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className={`grid ${gridCols} gap-4`}>
       {formaciones
         .sort((a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime())
         .slice(0, 4)
