@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import SocialMedia from "./SocialMedia";
 
-const Footer = () => {
+const Footer = (
+  {
+    hideMargin = false,
+  }: Readonly<{
+    hideMargin?: boolean;
+  }>
+) => {
   return (
-    <footer className="bg-primary py-12 mt-24 font-montserrat">
+    <footer className={`bg-primary py-12 ${hideMargin ? "mt-0" : "mt-24"} font-montserrat`}>
       <div className="xl:mx-36 flex flex-col w-full gap-6 text-white">
         <span className="flex flex-col xl:flex-row gap-2">
           <span className="w-full xl:w-6/12 flex items-center justify-center xl:justify-start">

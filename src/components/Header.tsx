@@ -20,13 +20,20 @@ import {
   removeDataFromSessionStorage,
 } from "@/lib/alumni-session";
 
-const Header = () => {
+const Header = (
+  {
+    hideMargin = false,
+  }: Readonly<{
+    hideMargin?: boolean;
+  }>
+) => {
   const router = useRouter();
   const currentPath = usePathname();
   const [userLogged, setUserLogged] = useState<User | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const isWork = currentPath === "/";
+  const isIndex = currentPath === "/";
+  const isWork = currentPath === "/work";
   const isCalendar = currentPath === "/calendar";
   const isProfiles = currentPath === "/profiles";
   const isFormacionContinua = currentPath === "/formacion-continua";
@@ -48,7 +55,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-primary mb-6 py-4 font-montserrat">
+    <header className={`bg-primary ${hideMargin ? "mb-0" : "mb-6"} py-4 font-montserrat`}>
       <div className="mx-4 lg:mx-36 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
@@ -119,8 +126,15 @@ const Header = () => {
             </svg>
             <HeaderButton
               isAnchor={true}
-              selected={isWork}
+              selected={isIndex}
               href="/"
+              text="Inicio"
+              styleClass="w-full xl:w-max"
+            />
+            <HeaderButton
+              isAnchor={true}
+              selected={isWork}
+              href="/work"
               text="Trabajo"
               styleClass="w-full xl:w-max"
             />

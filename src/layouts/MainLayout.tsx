@@ -4,8 +4,10 @@ import Head from "next/head";
 
 export default function MainLayout({
   children,
+  hideMargin = false,
 }: Readonly<{
   children: React.ReactNode;
+  hideMargin?: boolean;
 }>) {
   return (
     <>
@@ -20,9 +22,9 @@ export default function MainLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {/* Google Fonts */}
       </Head>
-      <Header></Header>
-      <main className="mx-8 lg:mx-36 h-auto">{children}</main>
-      <Footer></Footer>
+      <Header hideMargin={hideMargin}></Header>
+      <main className={`${hideMargin ? "mx-0" : "mx-8 lg:mx-36"} h-auto`}>{children}</main>
+      <Footer hideMargin={hideMargin}></Footer>
     </>
   );
 }

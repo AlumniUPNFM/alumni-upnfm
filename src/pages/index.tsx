@@ -1,26 +1,10 @@
-"use client";
-
 import MainLayout from "@/layouts/MainLayout";
-import { useEffect, useState } from "react";
-import { getDataFromSessionStorage } from "@/lib/alumni-session";
-import { User } from "@/types/types";
-import JobList from "@/components/JobList";
-import EmpresaList from "@/components/EmpresaList";
-import WorkSearch from "@/components/WorkSearch";
+import Hero from "@/components/Hero";
 
-export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    const user = getDataFromSessionStorage();
-    setUser(user);
-  }, []);
-
+export default function Index() {
   return (
-    <MainLayout>
-      <WorkSearch />
-      <JobList user={user} />
-      <EmpresaList user={user} />
+    <MainLayout hideMargin>
+      <Hero />
     </MainLayout>
   );
 }
