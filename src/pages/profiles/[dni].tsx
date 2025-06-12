@@ -72,7 +72,7 @@ export default function ProfileDetail() {
 
   return (
     <MainLayout hideMargin>
-      <section className="min-h-screen w-full bg-gradient-to-br from-gray-50/70 to-gray-100">
+      <section className="min-h-screen w-full bg-gradient-to-br from-gray-50/70 to-gray-100 font-montserrat">
         <div className="w-full">
           {/* Hero Section */}
           <div className="w-full bg-gradient-to-b from-custom-green/20 to-transparent py-16 md:py-24">
