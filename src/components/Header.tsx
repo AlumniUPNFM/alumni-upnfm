@@ -19,6 +19,7 @@ import {
   getDataFromSessionStorage,
   removeDataFromSessionStorage,
 } from "@/lib/alumni-session";
+import { useNotifications } from "@/hooks/use-notifications";
 
 const Header = (
   {
@@ -31,6 +32,7 @@ const Header = (
   const currentPath = usePathname();
   const [userLogged, setUserLogged] = useState<User | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { unreadCount } = useNotifications();
 
   const isIndex = currentPath === "/";
   const isWork = currentPath === "/work";
@@ -163,12 +165,17 @@ const Header = (
             />
             <HeaderButton
               isAnchor={true}
-              isDisabled={true}
               selected={isNotifications}
               href="/notifications"
               text="Notificaciones"
-              styleClass="w-full xl:w-max"
-            />
+              styleClass="w-full xl:w-max relative"
+            >
+              {unreadCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                  {unreadCount}
+                </span>
+              )}
+            </HeaderButton>
           </nav>
           {/* Perfil de usuario o botón de iniciar sesión */}
           {userLogged ? (
