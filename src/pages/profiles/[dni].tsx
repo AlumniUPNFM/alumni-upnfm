@@ -71,29 +71,41 @@ export default function ProfileDetail() {
   }
 
   return (
-    <MainLayout>
-      <section className="max-w-3xl mx-auto my-12 p-0 md:p-8 font-montserrat">
-        <div className="rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50/70 to-gray-100 border border-custom-green/10 shadow-sm">
-          <div className="flex flex-col items-center justify-center pt-10 pb-6 px-6 bg-gradient-to-b from-custom-green/10 to-transparent">
-            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg ring-4 ring-white bg-gray-200 overflow-hidden flex items-center justify-center mb-4">
-              <ProfileImage
-                classNameAvatar="rounded-full size-full"
-                classNameImage="object-cover"
-                dni={user.dni}
-                lastNames={user.last_names}
-                names={user.names}
-              />
+    <MainLayout hideMargin>
+      <section className="min-h-screen w-full bg-gradient-to-br from-gray-50/70 to-gray-100">
+        <div className="w-full">
+          {/* Hero Section */}
+          <div className="w-full bg-gradient-to-b from-custom-green/20 to-transparent py-16 md:py-24">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col items-center justify-center">
+                <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full shadow-xl ring-4 ring-white bg-gray-200 overflow-hidden flex items-center justify-center mb-6">
+                  <ProfileImage
+                    classNameAvatar="rounded-full size-full"
+                    classNameImage="object-cover"
+                    dni={user.dni}
+                    lastNames={user.last_names}
+                    names={user.names}
+                  />
+                </div>
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 text-center mb-2">
+                  {user.names} {user.last_names}
+                </h1>
+                <p className="text-custom-green font-medium text-lg md:text-xl mb-4 text-center">
+                  {user.degree?.name || "Carrera no especificada"}
+                </p>
+              </div>
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-1">
-              {user.names} {user.last_names}
-            </h1>
-            <p className="text-custom-green font-medium text-base md:text-lg mb-2 text-center">
-              {user.degree?.name || "Carrera no especificada"}
-            </p>
           </div>
-          <div className="px-6 py-8 bg-white grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ProfileField label="Correo electrónico" value={user.email} />
-            <ProfileField label="Carrera" value={user.degree?.name} />
+
+          {/* Content Section */}
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <ProfileField label="Correo electrónico" value={user.email} />
+                <ProfileField label="Carrera" value={user.degree?.name} />
+                {/* Aquí puedes agregar más campos según necesites */}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -113,8 +125,8 @@ interface ProfileFieldProps {
 }
 
 const ProfileField: React.FC<ProfileFieldProps> = ({ label, value }) => (
-  <div className="flex flex-col gap-1">
-    <span className="text-gray-600 font-semibold text-sm">{label}</span>
+  <div className="flex flex-col gap-1.5 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+    <span className="text-gray-600 font-semibold text-sm uppercase tracking-wide">{label}</span>
     <p className="text-gray-800 text-base break-words min-h-[1.5rem]">{value || "N/A"}</p>
   </div>
 );
