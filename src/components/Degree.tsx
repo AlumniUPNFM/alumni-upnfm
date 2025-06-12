@@ -11,20 +11,24 @@ interface Props {
 export default function Degree({ title, img, ofertas, onClick, compact = false }: Props) {
   if (compact) {
     return (
-      <div className="flex items-center gap-2 px-3 py-1.5">
-        <div className="w-6 h-6 rounded-full overflow-hidden bg-white/20">
-          <Image
-            src={img}
-            alt={title}
-            width={24}
-            height={24}
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <div className="flex items-center justify-center gap-2 px-3 py-1.5">
+        {title !== "Todas las carreras" && (
+          <div className="w-6 h-6 rounded-full overflow-hidden bg-white/20">
+            <Image
+              src={img}
+              alt={title}
+              width={24}
+              height={24}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
         <span className="text-sm font-medium whitespace-nowrap">{title}</span>
-        <span className="text-xs px-1.5 py-0.5 rounded-full bg-custom-green/10 text-custom-green">
-          {ofertas}
-        </span>
+        {title !== "Todas las carreras" && (
+          <span className="text-xs px-1.5 py-0.5 rounded-full bg-custom-green/10 text-custom-green">
+            {ofertas}
+          </span>
+        )}
       </div>
     );
   }
