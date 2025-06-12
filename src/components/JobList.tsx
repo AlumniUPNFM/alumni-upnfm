@@ -16,7 +16,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Link from "next/link";
 import { User } from "@/types/types";
 import { URL_BASE } from "@/config/constants";
-import { IconSettings, IconBriefcase } from "@tabler/icons-react";
+import { IconSettings, IconBriefcase, IconX } from "@tabler/icons-react";
 
 /**
  * @interface JobListProps
@@ -48,7 +48,21 @@ export default function JobList({ user }: JobListProps) {
 
   // Estado para mostrar solo las primeras 7 carreras o todas
   const [showAllDegrees, setShowAllDegrees] = useState(false);
+  const [selectedDegree, setSelectedDegree] = useState<string | null>(null);
   const displayedDegrees = showAllDegrees ? degrees : degrees?.slice(0, 7);
+
+  // Filtrar trabajos basado en la categoría seleccionada
+  const filteredJobs = selectedDegree
+    ? jobs?.filter((job) => job.degree?.name === selectedDegree)
+    : jobs;
+
+  const handleDegreeClick = (degreeName: string) => {
+    setSelectedDegree(selectedDegree === degreeName ? null : degreeName);
+  };
+
+  const clearFilter = () => {
+    setSelectedDegree(null);
+  };
 
   return (
     <section className="my-12 font-montserrat">
@@ -101,12 +115,21 @@ export default function JobList({ user }: JobListProps) {
               <>
                 <div className="space-y-3">
                   {displayedDegrees?.map(({ name, image_url: img, ofertas }, idx) => (
-                    <Degree
+                    <div
                       key={idx}
-                      title={name}
-                      img={img}
-                      ofertas={ofertas?.length ?? 0}
-                    />
+                      onClick={() => handleDegreeClick(name)}
+                      className={`cursor-pointer transition-all duration-300 transform hover:scale-[1.02] rounded-lg ${
+                        selectedDegree === name
+                          ? "bg-custom-green/20 border-2 border-custom-green shadow-lg ring-2 ring-custom-green/30 ring-offset-2"
+                          : "hover:bg-gray-50 hover:shadow-md"
+                      }`}
+                    >
+                      <Degree
+                        title={name}
+                        img={img}
+                        ofertas={ofertas?.length ?? 0}
+                      />
+                    </div>
                   ))}
                 </div>
                 {degrees && degrees.length > 7 && (
@@ -124,6 +147,20 @@ export default function JobList({ user }: JobListProps) {
 
         {/* Lista de Trabajos */}
         <div className="xl:col-span-3 space-y-4">
+          {selectedDegree && (
+            <div className="flex items-center justify-between bg-custom-green/10 p-4 rounded-lg mb-6 border border-custom-green/20 shadow-md">
+              <span className="text-custom-green font-semibold text-lg">
+                Filtrado por: {selectedDegree}
+              </span>
+              <button
+                onClick={clearFilter}
+                className="text-custom-green hover:text-custom-green/80 transition-colors duration-200 bg-white p-2 rounded-full hover:bg-custom-green/5"
+                title="Limpiar filtro"
+              >
+                <IconX className="w-5 h-5" />
+              </button>
+            </div>
+          )}
           {loadingTrabajos ? (
             <LoadingSpinner 
               text="Cargando ofertas..." 
@@ -136,7 +173,7 @@ export default function JobList({ user }: JobListProps) {
             </p>
           ) : (
             <div className="space-y-4">
-              {jobs?.slice(0, 10).map(
+              {filteredJobs?.slice(0, 10).map(
                 ({
                   id,
                   puesto,
@@ -159,6 +196,11 @@ export default function JobList({ user }: JobListProps) {
                     ubicacion={ubicacion}
                   />
                 )
+              )}
+              {filteredJobs?.length === 0 && (
+                <p className="text-center text-gray-500 bg-gray-50/30 p-4 rounded-lg border border-gray-100">
+                  No hay ofertas disponibles para esta categoría
+                </p>
               )}
             </div>
           )}

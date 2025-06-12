@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { GetNotifications } from "@/services/notifications";
 import { Notification } from "@/services/notifications.types";
 import { subMonths } from "date-fns";
+import { supabase } from "@/lib/supabase-client";
+import { toast } from "sonner";
 
 interface UseNotificationsHook {
   notifications: Notification[];
@@ -10,6 +12,7 @@ interface UseNotificationsHook {
   error: string | null;
   refreshNotifications: () => Promise<void>;
   markAsRead: (id: number) => void;
+  markAllAsRead: () => void;
   isRead: (id: number) => boolean;
 }
 
@@ -84,8 +87,43 @@ export const useNotifications = (): UseNotificationsHook => {
     }
   };
 
+  const markAllAsRead = () => {
+    const allIds = notifications.map(n => n.id);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(allIds));
+    updateUnreadCount(notifications);
+  };
+
   useEffect(() => {
     fetchNotifications();
+
+    // Subscribe to real-time notifications
+    const channel = supabase
+      .channel('notifications')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'notifications'
+        },
+        (payload) => {
+          const newNotification = payload.new as Notification;
+          setNotifications(prev => [newNotification, ...prev]);
+          updateUnreadCount([newNotification, ...notifications]);
+          
+          // Show toast notification
+          toast.info(newNotification.content, {
+            duration: 5000,
+            position: "top-right",
+          });
+        }
+      )
+      .subscribe();
+
+    // Cleanup subscription
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   return {
@@ -95,6 +133,7 @@ export const useNotifications = (): UseNotificationsHook => {
     error,
     refreshNotifications: fetchNotifications,
     markAsRead,
+    markAllAsRead,
     isRead,
   };
 }; 
