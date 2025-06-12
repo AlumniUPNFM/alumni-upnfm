@@ -128,17 +128,17 @@ export default function Page() {
         </div>
       ) : (
         <div className="container mx-auto px-4 py-8 max-w-4xl">
-          <div className="bg-white rounded-lg shadow-lg p-6 space-y-8">
+          <div className="space-y-8">
             {/* Header Section */}
             <div className="text-center space-y-2">
-              <h1 className="text-2xl font-bold text-gray-900">Perfil de Usuario</h1>
+              <h1 className="text-2xl font-bold text-gray-800">Perfil de Usuario</h1>
               <p className="text-gray-600">Actualiza tu información personal</p>
             </div>
 
             {/* Profile Image Section */}
-            <div className="flex flex-col items-center space-y-4 p-6 bg-gray-50 rounded-lg">
+            <div className="flex flex-col items-center space-y-4 p-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
               <ProfileImage
-                classNameAvatar="size-32 border-4 border-white shadow-lg"
+                classNameAvatar="size-32 border-4 border-gray-100 shadow-sm"
                 dni={user.dni}
                 lastNames={user.last_names}
                 names={user.names}
@@ -150,7 +150,7 @@ export default function Page() {
                 <Input
                   type="file"
                   id="nueva-imagen"
-                  className="bg-white"
+                  className="bg-gray-50 border-gray-200"
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       const reader = new FileReader();
@@ -167,10 +167,10 @@ export default function Page() {
             </div>
 
             {/* Form Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Personal Information Section */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">Información Personal</h2>
+                <h2 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Información Personal</h2>
                 
                 <div className="space-y-4">
                   <div className="space-y-2">
@@ -179,7 +179,7 @@ export default function Page() {
                     </Label>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       id="nombres"
                       value={userData.names}
                       onChange={(e) => {
@@ -195,7 +195,7 @@ export default function Page() {
                     </Label>
                     <Input
                       type="text"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       id="apellidos"
                       value={userData.last_names}
                       onChange={(e) => {
@@ -211,7 +211,7 @@ export default function Page() {
                     </Label>
                     <Input
                       id="dni"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       type="text"
                       value={userData.dni}
                       onChange={(e) => {
@@ -230,7 +230,7 @@ export default function Page() {
                         <Button
                           variant={"outline"}
                           className={cn(
-                            "w-full justify-start text-left font-normal bg-white",
+                            "w-full justify-start text-left font-normal bg-gray-50 border-gray-200 hover:bg-gray-100",
                             !userData.birthdate && "text-muted-foreground"
                           )}
                         >
@@ -259,7 +259,7 @@ export default function Page() {
 
               {/* Contact Information Section */}
               <div className="space-y-4">
-                <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">Información de Contacto</h2>
+                <h2 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Información de Contacto</h2>
                 
                 <div className="space-y-4">
                   <div className="space-y-2">
@@ -268,7 +268,7 @@ export default function Page() {
                     </Label>
                     <Input
                       id="email"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       type="email"
                       value={userData.email || ""}
                       onChange={(e) => {
@@ -284,7 +284,7 @@ export default function Page() {
                     </Label>
                     <Input
                       id="phone"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       type="text"
                       value={userData.phone || ""}
                       onChange={(e) => {
@@ -300,7 +300,7 @@ export default function Page() {
                     </Label>
                     <Input
                       id="address"
-                      className="bg-white"
+                      className="bg-gray-50 border-gray-200 focus:border-gray-300"
                       type="text"
                       value={userData.address || ""}
                       onChange={(e) => {
@@ -326,11 +326,11 @@ export default function Page() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
               <Button 
                 disabled={loading} 
                 onClick={handleSubmit}
-                className="flex-1 bg-blue-600 hover:bg-blue-700"
+                className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
               >
                 {loading ? (
                   <div className="flex items-center gap-2">
@@ -344,7 +344,7 @@ export default function Page() {
               <Button
                 variant="outline"
                 onClick={() => router.push("/change-password")}
-                className="flex-1"
+                className="flex-1 border-gray-200 hover:bg-gray-50"
               >
                 Cambiar Contraseña
               </Button>
