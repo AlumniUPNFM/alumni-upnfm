@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { GetNotifications } from "@/services/notifications";
 import { Notification } from "@/services/notifications.types";
+import { subMonths } from "date-fns";
 
 interface UseNotificationsHook {
   notifications: Notification[];
@@ -9,6 +10,7 @@ interface UseNotificationsHook {
   error: string | null;
   refreshNotifications: () => Promise<void>;
   markAsRead: (id: number) => void;
+  isRead: (id: number) => boolean;
 }
 
 const STORAGE_KEY = "readNotifications";
@@ -27,8 +29,33 @@ export const useNotifications = (): UseNotificationsHook => {
 
   const updateUnreadCount = (notifs: Notification[]) => {
     const readIds = getReadNotifications();
-    const unread = notifs.filter(n => !readIds.includes(n.id)).length;
+    const oneMonthAgo = subMonths(new Date(), 1);
+    
+    // Mark notifications older than a month as read
+    const oldNotifications = notifs
+      .filter(n => new Date(n.created_at) < oneMonthAgo)
+      .map(n => n.id);
+    
+    if (oldNotifications.length > 0) {
+      const updatedReadIds = [...new Set([...readIds, ...oldNotifications])];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedReadIds));
+    }
+
+    const unread = notifs.filter(n => {
+      const isOld = new Date(n.created_at) < oneMonthAgo;
+      return !readIds.includes(n.id) && !isOld;
+    }).length;
+    
     setUnreadCount(unread);
+  };
+
+  const isRead = (id: number): boolean => {
+    const readIds = getReadNotifications();
+    const notification = notifications.find(n => n.id === id);
+    if (!notification) return false;
+    
+    const isOld = new Date(notification.created_at) < subMonths(new Date(), 1);
+    return readIds.includes(id) || isOld;
   };
 
   const fetchNotifications = async () => {
@@ -68,5 +95,6 @@ export const useNotifications = (): UseNotificationsHook => {
     error,
     refreshNotifications: fetchNotifications,
     markAsRead,
+    isRead,
   };
 }; 

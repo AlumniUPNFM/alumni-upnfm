@@ -8,6 +8,7 @@ interface Props {
   href?: string;
   styleClass?: string;
   isDisabled?: boolean;
+  children?: React.ReactNode;
 }
 
 const HeaderButton = ({
@@ -18,6 +19,7 @@ const HeaderButton = ({
   isDisabled: isDisabled,
   href,
   styleClass,
+  children,
 }: Props) => {
   const baseClass = `flex items-center justify-center text-center p-2 px-4 rounded-full text-sm xl:text-base transition-colors duration-150 outline-none ring-0 ${
     selected
@@ -31,10 +33,12 @@ const HeaderButton = ({
   return isAnchor && href ? (
     <Link id={id} className={baseClass} href={href}>
       {text}
+      {children}
     </Link>
   ) : (
     <button id={id} className={baseClass}>
       {text}
+      {children}
     </button>
   );
 };
