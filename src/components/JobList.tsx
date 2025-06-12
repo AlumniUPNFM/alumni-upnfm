@@ -187,10 +187,13 @@ export default function JobList({ user }: JobListProps) {
                   salario,
                   degree: { name: carrera } = { name: "" },
                   created_at: fecha,
-                  empresa: { name: ubicacion, image_url: img } = {
-                    name: "",
-                    image_url: "",
-                  },
+                  empresa,
+                  ubicacion,
+                  tipo_oferta,
+                  jornada,
+                  contrato,
+                  experiencia_laboral,
+                  idiomas,
                 }) => (
                   <OfertaTrabajo
                     key={id}
@@ -198,9 +201,15 @@ export default function JobList({ user }: JobListProps) {
                     puesto={puesto}
                     salario={salario}
                     carrera={carrera}
+                    empresaName={empresa?.name ?? ""}
                     fecha={new Date(fecha).toISOString().split("T")[0]}
-                    img={`${URL_BASE}${img}`}
+                    img={`${URL_BASE}${empresa?.image_url ?? ""}`}
                     ubicacion={ubicacion}
+                    tipo_oferta={tipo_oferta}
+                    jornada={jornada}
+                    contrato={contrato}
+                    experiencia_laboral={experiencia_laboral}
+                    idiomas={idiomas}
                   />
                 )
               )}
