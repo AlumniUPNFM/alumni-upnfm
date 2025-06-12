@@ -53,8 +53,8 @@ export default function JobList({ user }: JobListProps) {
 
   // Filtrar trabajos basado en la categoría seleccionada
   const filteredJobs = selectedDegree
-    ? jobs?.filter((job) => job.degree?.name === selectedDegree)
-    : jobs;
+    ? jobs?.filter((job) => job.degree?.name === selectedDegree).slice(0, 3)
+    : jobs?.slice(0, 3);
 
   const handleDegreeClick = (degreeName: string) => {
     setSelectedDegree(selectedDegree === degreeName ? null : degreeName);
@@ -94,59 +94,62 @@ export default function JobList({ user }: JobListProps) {
       </header>
 
       {/* Contenedor principal con grid de categorías y ofertas */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
-        {/* Sidebar de Categorías */}
-        <aside className="xl:col-span-1">
-          <div className="bg-gradient-to-r from-custom-green/5 to-custom-green/10 rounded-lg p-3 text-center text-lg font-semibold mb-6">
-            <span className="text-custom-green">Categorías</span>
+      <div className="space-y-8">
+        {/* Barra de Categorías */}
+        <div className="bg-gradient-to-br from-gray-50/50 to-gray-50 rounded-lg p-4 border border-gray-100">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="bg-gradient-to-br from-custom-green/5 to-custom-green/10 p-2 rounded-lg">
+              <IconBriefcase className="text-custom-green w-5 h-5" />
+            </div>
+            <h3 className="text-lg font-semibold text-gray-800">Categorías</h3>
           </div>
-          <div className="bg-gradient-to-br from-gray-50/50 to-gray-50 rounded-lg p-4 border border-gray-100">
-            {loadingDegrees ? (
-              <LoadingSpinner 
-                text="Cargando categorías..." 
-                size={40} 
-                variant="minimal"
-              />
-            ) : errorDegrees ? (
-              <p className="text-center text-red-500 bg-red-50/30 p-3 rounded-lg border border-red-100">
-                Error al cargar las carreras
-              </p>
-            ) : (
-              <>
-                <div className="space-y-3">
-                  {displayedDegrees?.map(({ name, image_url: img, ofertas }, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => handleDegreeClick(name)}
-                      className={`cursor-pointer transition-all duration-300 transform hover:scale-[1.02] rounded-lg ${
-                        selectedDegree === name
-                          ? "bg-custom-green/20 border-2 border-custom-green shadow-lg ring-2 ring-custom-green/30 ring-offset-2"
-                          : "hover:bg-gray-50 hover:shadow-md"
-                      }`}
-                    >
-                      <Degree
-                        title={name}
-                        img={img}
-                        ofertas={ofertas?.length ?? 0}
-                      />
-                    </div>
-                  ))}
+          
+          {loadingDegrees ? (
+            <LoadingSpinner 
+              text="Cargando categorías..." 
+              size={40} 
+              variant="minimal"
+            />
+          ) : errorDegrees ? (
+            <p className="text-center text-red-500 bg-red-50/30 p-3 rounded-lg border border-red-100">
+              Error al cargar las carreras
+            </p>
+          ) : (
+            <div className="flex flex-wrap gap-2">
+              {displayedDegrees?.map(({ name, image_url: img, ofertas }, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => handleDegreeClick(name)}
+                  className={`cursor-pointer transition-all duration-300 ${
+                    selectedDegree === name
+                      ? "bg-custom-green text-white shadow-md"
+                      : "bg-white hover:bg-gray-50 text-gray-700 border border-gray-200"
+                  } rounded-lg`}
+                >
+                  <Degree
+                    title={name}
+                    img={img}
+                    ofertas={ofertas?.length ?? 0}
+                    compact={true}
+                  />
                 </div>
-                {degrees && degrees.length > 7 && (
-                  <button
-                    className="mt-4 w-full text-custom-green font-medium py-2 rounded-lg hover:bg-custom-green/10 transition-colors duration-200"
-                    onClick={() => setShowAllDegrees((prev) => !prev)}
-                  >
+              ))}
+              {degrees && degrees.length > 7 && (
+                <button
+                  onClick={() => setShowAllDegrees((prev) => !prev)}
+                  className="flex items-center gap-1 px-3 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <span className="text-sm font-medium">
                     {showAllDegrees ? "Ver menos" : "Ver más"}
-                  </button>
-                )}
-              </>
-            )}
-          </div>
-        </aside>
+                  </span>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
 
         {/* Lista de Trabajos */}
-        <div className="xl:col-span-3 space-y-4">
+        <div className="space-y-4">
           {selectedDegree && (
             <div className="flex items-center justify-between bg-custom-green/10 p-4 rounded-lg mb-6 border border-custom-green/20 shadow-md">
               <span className="text-custom-green font-semibold text-lg">
@@ -172,8 +175,8 @@ export default function JobList({ user }: JobListProps) {
               Error al cargar las ofertas de trabajo
             </p>
           ) : (
-            <div className="space-y-4">
-              {filteredJobs?.slice(0, 10).map(
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredJobs?.map(
                 ({
                   id,
                   puesto,
@@ -198,9 +201,11 @@ export default function JobList({ user }: JobListProps) {
                 )
               )}
               {filteredJobs?.length === 0 && (
-                <p className="text-center text-gray-500 bg-gray-50/30 p-4 rounded-lg border border-gray-100">
-                  No hay ofertas disponibles para esta categoría
-                </p>
+                <div className="col-span-full">
+                  <p className="text-center text-gray-500 bg-gray-50/30 p-4 rounded-lg border border-gray-100">
+                    No hay ofertas disponibles para esta categoría
+                  </p>
+                </div>
               )}
             </div>
           )}
