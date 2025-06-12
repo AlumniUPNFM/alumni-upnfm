@@ -51,7 +51,7 @@ export async function POST(req: NextApiRequest, res: NextApiResponse) {
     return res.status(400).json({
       isSuccess: false,
       data: null,
-      message: "El DNI o la contraseña son incorrectos.",
+      message: "El DNI, email o contraseña son incorrectos.",
     });
   }
 
