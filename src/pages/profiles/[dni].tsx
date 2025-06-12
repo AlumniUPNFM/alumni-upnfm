@@ -76,7 +76,7 @@ export default function ProfileDetail() {
         <div className="w-full">
           {/* Hero Section */}
           <div className="w-full bg-gradient-to-b from-custom-green/20 to-transparent py-16 md:py-24">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6">
               <div className="flex flex-col items-center justify-center">
                 <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full shadow-xl ring-4 ring-white bg-gray-200 overflow-hidden flex items-center justify-center mb-6">
                   <ProfileImage
@@ -98,9 +98,9 @@ export default function ProfileDetail() {
           </div>
 
           {/* Content Section */}
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div className="bg-white rounded-2xl shadow-sm p-8">
+              <div className="flex flex-col gap-8">
                 <ProfileField label="Correo electrónico" value={user.email} />
                 <ProfileField label="Carrera" value={user.degree?.name} />
                 {/* Aquí puedes agregar más campos según necesites */}
