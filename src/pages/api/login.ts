@@ -15,18 +15,26 @@ export default async function handler(
 
 export async function POST(req: NextApiRequest, res: NextApiResponse) {
   const body = await req.body;
-  const { dni, password } = body;
+  const { dni, email, password } = body;
 
   // Validar los datos
-  if (!dni || !password) {
+  if (!dni || !email || !password) {
     return res
       .status(400)
       .json({ message: "Todos los campos son obligatorios." });
   }
 
+  // Validar formato de email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res
+      .status(400)
+      .json({ message: "Por favor ingrese un email válido." });
+  }
+
   // Buscar el usuario en Supabase
   const { data, error } = await supabase.rpc("login", {
-    p_props: { dni, password },
+    p_props: { dni, email, password },
   });
 
   if (error) {

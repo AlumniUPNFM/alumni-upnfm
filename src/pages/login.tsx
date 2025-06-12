@@ -28,6 +28,7 @@ export default function Login() {
 
   const [form, setForm] = useState({
     dni: "",
+    email: "",
     password: "",
   });
 
@@ -77,6 +78,7 @@ export default function Login() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           dni: form.dni,
+          email: form.email,
           password: form.password,
         }),
       });
@@ -115,7 +117,7 @@ export default function Login() {
   };
 
   const validateForm = () => {
-    if (!form.dni || !form.password) {
+    if (!form.dni || !form.email || !form.password) {
       setMessage("Todos los campos son obligatorios.");
       setError(true);
       return false;
@@ -123,6 +125,13 @@ export default function Login() {
 
     if (form.dni.length !== 13) {
       setMessage("El DNI debe tener 13 dígitos.");
+      setError(true);
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      setMessage("Por favor ingrese un email válido.");
       setError(true);
       return false;
     }
@@ -157,6 +166,18 @@ export default function Login() {
                 value={form.dni}
                 onChange={handleChange}
                 maxLength={13}
+                required
+                aria-invalid={error}
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="ejemplo@correo.com"
+                value={form.email}
+                onChange={handleChange}
                 required
                 aria-invalid={error}
               />
