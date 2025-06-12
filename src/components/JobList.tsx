@@ -16,7 +16,7 @@ import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Link from "next/link";
 import { User } from "@/types/types";
 import { URL_BASE } from "@/config/constants";
-import { IconSettings, IconBriefcase, IconX } from "@tabler/icons-react";
+import { IconSettings, IconBriefcase, IconX, IconPlus, IconMinus } from "@tabler/icons-react";
 
 /**
  * @interface JobListProps
@@ -97,13 +97,27 @@ export default function JobList({ user }: JobListProps) {
       <div className="space-y-8">
         {/* Barra de Categorías */}
         <div className="bg-gradient-to-br from-gray-50/50 to-gray-50 rounded-lg p-4 border border-gray-100">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="bg-gradient-to-br from-custom-green/5 to-custom-green/10 p-2 rounded-lg">
-              <IconBriefcase className="text-custom-green w-5 h-5" />
+          <div className="flex items-center gap-3 mb-4 justify-between">
+            <div className="flex items-center gap-3">
+              <div className="bg-gradient-to-br from-custom-green/5 to-custom-green/10 p-2 rounded-lg">
+                <IconBriefcase className="text-custom-green w-5 h-5" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800">Categorías</h3>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800">Categorías</h3>
+            {degrees && degrees.length > 7 && (
+              <button
+                onClick={() => setShowAllDegrees((prev) => !prev)}
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                title={showAllDegrees ? "Ver menos" : "Ver más"}
+              >
+                {showAllDegrees ? (
+                  <IconMinus className="w-4 h-4" />
+                ) : (
+                  <IconPlus className="w-4 h-4" />
+                )}
+              </button>
+            )}
           </div>
-          
           {loadingDegrees ? (
             <LoadingSpinner 
               text="Cargando categorías..." 
@@ -134,16 +148,6 @@ export default function JobList({ user }: JobListProps) {
                   />
                 </div>
               ))}
-              {degrees && degrees.length > 7 && (
-                <button
-                  onClick={() => setShowAllDegrees((prev) => !prev)}
-                  className="flex items-center gap-1 px-3 py-2 rounded-lg bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <span className="text-sm font-medium">
-                    {showAllDegrees ? "Ver menos" : "Ver más"}
-                  </span>
-                </button>
-              )}
             </div>
           )}
         </div>
