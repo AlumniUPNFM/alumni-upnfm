@@ -127,189 +127,230 @@ export default function Page() {
           <p className="text-red-500">No autorizado. Redirigiendo al login...</p>
         </div>
       ) : (
-        <main className="flex flex-col gap-2 mx-auto max-w-xs">
-          <div className="grid w-full justify-center items-center gap-1.5">
-            <ProfileImage
-              classNameAvatar="size-24"
-              dni={user.dni}
-              lastNames={user.last_names}
-              names={user.names}
-            ></ProfileImage>
-          </div>
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="nombres">
-              Nombres
-            </Label>
-            <Input
-              type="text"
-              className="bg-white"
-              id="nombres"
-              value={userData.names}
-              onChange={(e) => {
-                if (e) handleChangeOnInput(CHANGE_TYPES.NAMES, e.target.value);
-              }}
-              placeholder="Juan Alberto"
-            />
-          </div>
+        <div className="container mx-auto px-4 py-8 max-w-4xl">
+          <div className="bg-white rounded-lg shadow-lg p-6 space-y-8">
+            {/* Header Section */}
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold text-gray-900">Perfil de Usuario</h1>
+              <p className="text-gray-600">Actualiza tu información personal</p>
+            </div>
 
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="apellidos">
-              Apellidos
-            </Label>
-            <Input
-              type="text"
-              className="bg-white"
-              id="apellidos"
-              value={userData.last_names}
-              onChange={(e) => {
-                if (e)
-                  handleChangeOnInput(CHANGE_TYPES.LAST_NAMES, e.target.value);
-              }}
-              placeholder="Perez Hernández"
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="dni">
-              DNI
-            </Label>
-            <Input
-              id="dni"
-              className="bg-white"
-              type="text"
-              value={userData.dni}
-              onChange={(e) => {
-                if (e) handleChangeOnInput(CHANGE_TYPES.DNI, e.target.value);
-              }}
-              placeholder="0801999912345"
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="email">
-              Email
-            </Label>
-            <Input
-              id="email"
-              className="bg-white"
-              type="email"
-              value={userData.email || ""}
-              onChange={(e) => {
-                if (e) handleChangeOnInput(CHANGE_TYPES.EMAIL, e.target.value);
-              }}
-              placeholder="example@example.com"
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="phone">
-              Teléfono
-            </Label>
-            <Input
-              id="phone"
-              className="bg-white"
-              type="text"
-              value={userData.phone || ""}
-              onChange={(e) => {
-                if (e) handleChangeOnInput(CHANGE_TYPES.PHONE, e.target.value);
-              }}
-              placeholder="88285038"
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="address">
-              Dirección
-            </Label>
-            <Input
-              id="address"
-              className="bg-white"
-              type="text"
-              value={userData.address || ""}
-              onChange={(e) => {
-                if (e)
-                  handleChangeOnInput(CHANGE_TYPES.ADDRESS, e.target.value);
-              }}
-              placeholder="Calle 123"
-            />
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="birthdate">
-              Fecha de Nacimiento
-            </Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "justify-start text-left font-normal",
-                    !userData.birthdate && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon />
-                  {userData.birthdate ? (
-                    format(userData.birthdate, "PPP")
-                  ) : (
-                    <span>Seleccionar una fecha</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={userData.birthdate || new Date()}
-                  onSelect={(date) => {
-                    if (date) handleChangeOnInput(CHANGE_TYPES.BIRTHDATE, date);
-                  }}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="degree">
-              Carrera
-            </Label>
-            <SelectDegree
-              idDegree={userData.degree_id}
-              onSelect={(e) => {
-                if (e) handleChangeOnInput(CHANGE_TYPES.DEGREE_ID, e);
-              }}
-            />
-          </div>
-          <div className="grid w-full items-center gap-1.5">
-            <Label className="font-bold" htmlFor="nombres">
-              Nueva imagen de perfil
-            </Label>
-            <Input
-              type="file"
-              id="nueva-imagen"
-              onChange={(e) => {
-                if (e.target.files && e.target.files[0]) {
-                  const reader = new FileReader();
-                  reader.onload = (e) => {
-                    if (e.target?.result) {
-                      setNewImage(e.target.result as string);
+            {/* Profile Image Section */}
+            <div className="flex flex-col items-center space-y-4 p-6 bg-gray-50 rounded-lg">
+              <ProfileImage
+                classNameAvatar="size-32 border-4 border-white shadow-lg"
+                dni={user.dni}
+                lastNames={user.last_names}
+                names={user.names}
+              />
+              <div className="space-y-2 w-full max-w-xs">
+                <Label className="font-medium text-gray-700" htmlFor="nueva-imagen">
+                  Cambiar foto de perfil
+                </Label>
+                <Input
+                  type="file"
+                  id="nueva-imagen"
+                  className="bg-white"
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      const reader = new FileReader();
+                      reader.onload = (e) => {
+                        if (e.target?.result) {
+                          setNewImage(e.target.result as string);
+                        }
+                      };
+                      reader.readAsDataURL(e.target.files[0]);
                     }
-                  };
-                  reader.readAsDataURL(e.target.files[0]);
-                }
-              }}
-            />
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Form Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Personal Information Section */}
+              <div className="space-y-4">
+                <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">Información Personal</h2>
+                
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="nombres">
+                      Nombres
+                    </Label>
+                    <Input
+                      type="text"
+                      className="bg-white"
+                      id="nombres"
+                      value={userData.names}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.NAMES, e.target.value);
+                      }}
+                      placeholder="Juan Alberto"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="apellidos">
+                      Apellidos
+                    </Label>
+                    <Input
+                      type="text"
+                      className="bg-white"
+                      id="apellidos"
+                      value={userData.last_names}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.LAST_NAMES, e.target.value);
+                      }}
+                      placeholder="Perez Hernández"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="dni">
+                      DNI
+                    </Label>
+                    <Input
+                      id="dni"
+                      className="bg-white"
+                      type="text"
+                      value={userData.dni}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.DNI, e.target.value);
+                      }}
+                      placeholder="0801999912345"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="birthdate">
+                      Fecha de Nacimiento
+                    </Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-full justify-start text-left font-normal bg-white",
+                            !userData.birthdate && "text-muted-foreground"
+                          )}
+                        >
+                          <CalendarIcon className="mr-2 h-4 w-4" />
+                          {userData.birthdate ? (
+                            format(userData.birthdate, "PPP")
+                          ) : (
+                            <span>Seleccionar una fecha</span>
+                          )}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={userData.birthdate || new Date()}
+                          onSelect={(date) => {
+                            if (date) handleChangeOnInput(CHANGE_TYPES.BIRTHDATE, date);
+                          }}
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Information Section */}
+              <div className="space-y-4">
+                <h2 className="text-lg font-semibold text-gray-900 border-b pb-2">Información de Contacto</h2>
+                
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="email">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      className="bg-white"
+                      type="email"
+                      value={userData.email || ""}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.EMAIL, e.target.value);
+                      }}
+                      placeholder="example@example.com"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="phone">
+                      Teléfono
+                    </Label>
+                    <Input
+                      id="phone"
+                      className="bg-white"
+                      type="text"
+                      value={userData.phone || ""}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.PHONE, e.target.value);
+                      }}
+                      placeholder="88285038"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="address">
+                      Dirección
+                    </Label>
+                    <Input
+                      id="address"
+                      className="bg-white"
+                      type="text"
+                      value={userData.address || ""}
+                      onChange={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.ADDRESS, e.target.value);
+                      }}
+                      placeholder="Calle 123"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium text-gray-700" htmlFor="degree">
+                      Carrera
+                    </Label>
+                    <SelectDegree
+                      idDegree={userData.degree_id}
+                      onSelect={(e) => {
+                        if (e) handleChangeOnInput(CHANGE_TYPES.DEGREE_ID, e);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t">
+              <Button 
+                disabled={loading} 
+                onClick={handleSubmit}
+                className="flex-1 bg-blue-600 hover:bg-blue-700"
+              >
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    Guardando...
+                  </div>
+                ) : (
+                  "Guardar Cambios"
+                )}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => router.push("/change-password")}
+                className="flex-1"
+              >
+                Cambiar Contraseña
+              </Button>
+            </div>
           </div>
-          <Button disabled={loading} onClick={handleSubmit}>
-            Guardar
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => router.push("/change-password")}
-            className="w-full"
-          >
-            Cambiar Contraseña
-          </Button>
-        </main>
+        </div>
       )}
     </MainLayout>
   );
