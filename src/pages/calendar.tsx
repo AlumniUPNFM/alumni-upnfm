@@ -81,14 +81,14 @@ export default function Calendar() {
 
   return (
     <MainLayout hideMargin>
-      <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
         <main className="max-w-7xl mx-auto p-6 font-montserrat">
           {/* Header Section */}
           <div className="mb-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-xl shadow-lg">
+                  <div className="p-3 bg-gradient-to-r from-blue-600 to-sky-600 rounded-xl shadow-lg">
                     <IconCalendar className="w-8 h-8 text-white" />
                   </div>
                   <div>
@@ -106,14 +106,14 @@ export default function Calendar() {
                 <Button
                   onClick={() => refresh()}
                   variant="outline"
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 hover:border-emerald-300 hover:bg-emerald-50 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
                 >
                   <IconRefresh className="w-4 h-4" />
                   Actualizar
                 </Button>
                 {user?.is_admin && (
                   <Link href="/eventos">
-                    <Button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
+                    <Button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
                       <IconSettings className="w-5 h-5" />
                       Gestionar Eventos
                     </Button>
@@ -132,8 +132,8 @@ export default function Calendar() {
                     <p className="text-sm font-medium text-gray-600">Total Eventos</p>
                     <p className="text-3xl font-bold text-gray-900">{eventos?.length || 0}</p>
                   </div>
-                  <div className="p-3 bg-emerald-100 rounded-full">
-                    <IconCalendar className="w-6 h-6 text-emerald-600" />
+                  <div className="p-3 bg-blue-100 rounded-full">
+                    <IconCalendar className="w-6 h-6 text-blue-600" />
                   </div>
                 </div>
               </CardContent>
@@ -184,9 +184,9 @@ export default function Calendar() {
 
           {/* Calendar Section */}
           <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-xl overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-gray-50 to-emerald-50 border-b border-gray-200">
+            <CardHeader className="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-200">
               <CardTitle className="text-xl font-semibold text-gray-800 flex items-center gap-3">
-                <IconCalendar className="w-6 h-6 text-emerald-600" />
+                <IconCalendar className="w-6 h-6 text-blue-600" />
                 Vista de Calendario
               </CardTitle>
             </CardHeader>
@@ -296,7 +296,7 @@ export default function Calendar() {
                     {user?.is_admin && (
                       <div className="mt-4">
                         <Link href="/eventos">
-                          <Button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-lg transition-all duration-200">
+                          <Button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white rounded-lg transition-all duration-200">
                             <IconPlus className="w-4 h-4" />
                             Crear Primer Evento
                           </Button>
@@ -312,9 +312,9 @@ export default function Calendar() {
           {/* Upcoming Events Preview */}
           {!loading && !error && getUpcomingEvents().length > 0 && (
             <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-lg mt-8">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-emerald-50 border-b border-gray-200">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-200">
                 <CardTitle className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <IconClock className="w-5 h-5 text-emerald-600" />
+                  <IconClock className="w-5 h-5 text-blue-600" />
                   Próximos Eventos
                 </CardTitle>
               </CardHeader>
@@ -323,7 +323,7 @@ export default function Calendar() {
                   {getUpcomingEvents().slice(0, 6).map((evento) => {
                     const status = getEventStatus(evento.fecha);
                     return (
-                      <div key={evento.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-emerald-300 transition-all duration-200">
+                      <div key={evento.id} className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-blue-300 transition-all duration-200">
                         <div className="flex items-start justify-between mb-2">
                           <h4 className="font-semibold text-gray-900 text-sm">{evento.name}</h4>
                           <Badge variant={status.variant} className="text-xs">

@@ -159,14 +159,14 @@ export default function FormacionesMaintenance() {
 
   return (
     <MainLayout hideMargin>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
         <main className="max-w-7xl mx-auto p-6 font-montserrat">
           {/* Header Section */}
           <div className="mb-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
-                  <div className="p-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl shadow-lg">
+                  <div className="p-3 bg-gradient-to-r from-blue-600 to-sky-600 rounded-xl shadow-lg">
                     <IconSchool className="w-8 h-8 text-white" />
                   </div>
                   <div>
@@ -184,7 +184,7 @@ export default function FormacionesMaintenance() {
                 <Button
                   onClick={() => refresh()}
                   variant="outline"
-                  className="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 transition-all duration-200"
+                  className="flex items-center gap-2 px-4 py-2 border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200"
                 >
                   <IconRefresh className="w-4 h-4" />
                   Actualizar
@@ -193,7 +193,7 @@ export default function FormacionesMaintenance() {
                   <DialogTrigger asChild>
                     <Button
                       onClick={() => setIsDialogOpen(true)}
-                      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+                      className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
                     >
                       <IconPlus className="w-5 h-5" />
                       Nueva Formación
@@ -238,8 +238,8 @@ export default function FormacionesMaintenance() {
                     <p className="text-sm font-medium text-gray-600">Total Formaciones</p>
                     <p className="text-3xl font-bold text-gray-900">{formaciones?.length || 0}</p>
                   </div>
-                  <div className="p-3 bg-indigo-100 rounded-full">
-                    <IconSchool className="w-6 h-6 text-indigo-600" />
+                  <div className="p-3 bg-blue-100 rounded-full">
+                    <IconSchool className="w-6 h-6 text-blue-600" />
                   </div>
                 </div>
               </CardContent>
@@ -301,7 +301,7 @@ export default function FormacionesMaintenance() {
                     placeholder="Buscar formaciones por nombre, tipo, carrera, modalidad, institución o descripción..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 pr-4 py-3 border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-xl transition-all duration-200"
+                    className="pl-10 pr-4 py-3 border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-xl transition-all duration-200"
                   />
                 </div>
 
@@ -313,7 +313,7 @@ export default function FormacionesMaintenance() {
                     onValueChange={setFilterTipo}
                     placeholder="Tipo de Formación"
                     searchPlaceholder="Buscar tipo..."
-                    className="border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-lg transition-all duration-200"
+                    className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
                   />
 
                   <Select
@@ -322,7 +322,7 @@ export default function FormacionesMaintenance() {
                     onValueChange={setFilterCarrera}
                     placeholder="Carrera"
                     searchPlaceholder="Buscar carrera..."
-                    className="border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-lg transition-all duration-200"
+                    className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
                   />
 
                   <Select
@@ -331,7 +331,7 @@ export default function FormacionesMaintenance() {
                     onValueChange={setFilterModalidad}
                     placeholder="Modalidad"
                     searchPlaceholder="Buscar modalidad..."
-                    className="border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-lg transition-all duration-200"
+                    className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
                   />
 
                   <Select
@@ -340,7 +340,7 @@ export default function FormacionesMaintenance() {
                     onValueChange={setFilterEstado}
                     placeholder="Estado"
                     searchPlaceholder="Buscar estado..."
-                    className="border-2 border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 rounded-lg transition-all duration-200"
+                    className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
                   />
 
                   <Button
@@ -410,8 +410,8 @@ export default function FormacionesMaintenance() {
                       <CardHeader className="pb-3">
                         <div className="flex items-start justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="p-2 bg-indigo-100 rounded-lg group-hover:bg-indigo-200 transition-colors">
-                              <IconSchool className="w-5 h-5 text-indigo-600" />
+                            <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                              <IconSchool className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
                               <CardTitle className="text-lg font-semibold text-gray-900 line-clamp-2">
@@ -435,7 +435,7 @@ export default function FormacionesMaintenance() {
                         {/* Información Principal */}
                         <div className="grid grid-cols-2 gap-3 text-sm">
                           <div className="flex items-center gap-2">
-                            <IconUserCheck className="w-4 h-4 text-purple-600" />
+                            <IconUserCheck className="w-4 h-4 text-sky-600" />
                             <span className="text-gray-700 font-medium">{formacion.degree?.name}</span>
                           </div>
                           <div className="flex items-center gap-2">
