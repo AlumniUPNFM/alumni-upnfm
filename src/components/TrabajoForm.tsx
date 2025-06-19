@@ -74,12 +74,12 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
           <div>
             <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
               {isEditing ? "Editar Oferta Laboral" : "Nueva Oferta Laboral"}
-            </DialogTitle>
+        </DialogTitle>
             <DialogDescription className="text-gray-600 mt-1">
               {isEditing
                 ? "Actualiza la información de la oferta laboral"
                 : "Completa todos los campos para crear una nueva oferta"}
-            </DialogDescription>
+        </DialogDescription>
           </div>
         </div>
       </DialogHeader>
@@ -101,13 +101,13 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                   <IconBriefcase className="w-4 h-4" />
                   Puesto *
                 </Label>
-                <Input
-                  id="puesto"
-                  value={formData.puesto}
-                  onChange={(e) => handleChange("puesto", e.target.value)}
+            <Input
+              id="puesto"
+              value={formData.puesto}
+              onChange={(e) => handleChange("puesto", e.target.value)}
                   placeholder="Ej: Desarrollador Frontend"
                   className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
-                />
+            />
               </div>
 
               <div className="space-y-2">
@@ -115,11 +115,11 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                   <IconCurrency className="w-4 h-4" />
                   Salario (L.) *
                 </Label>
-                <Input
-                  id="salario"
-                  type="number"
-                  value={formData.salario}
-                  onChange={(e) => handleChange("salario", Number(e.target.value))}
+            <Input
+              id="salario"
+              type="number"
+              value={formData.salario}
+              onChange={(e) => handleChange("salario", Number(e.target.value))}
                   placeholder="25000"
                   className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
                 />
@@ -137,7 +137,7 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
               </div>
               <h3 className="text-lg font-semibold text-gray-800">Empresa y Carrera</h3>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="empresa_id" className="text-sm font-medium text-gray-700 flex items-center gap-2">
@@ -147,18 +147,18 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                 <SelectEmpresa
                   idEmpresa={formData.empresa_id}
                   onSelect={(id) => handleChange("empresa_id", id)}
-                />
-              </div>
+            />
+        </div>
 
               <div className="space-y-2">
                 <Label htmlFor="degree_id" className="text-sm font-medium text-gray-700 flex items-center gap-2">
                   <IconUserCheck className="w-4 h-4" />
                   Carrera *
                 </Label>
-                <SelectDegree
-                  idDegree={formData.degree_id}
-                  onSelect={(id) => handleChange("degree_id", id)}
-                />
+            <SelectDegree
+              idDegree={formData.degree_id}
+              onSelect={(id) => handleChange("degree_id", id)}
+            />
               </div>
             </div>
           </CardContent>
@@ -173,20 +173,20 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
               </div>
               <h3 className="text-lg font-semibold text-gray-800">Detalles del Trabajo</h3>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="ubicacion" className="text-sm font-medium text-gray-700 flex items-center gap-2">
                   <IconMapPin className="w-4 h-4" />
                   Ubicación *
                 </Label>
-                <Input
-                  id="ubicacion"
-                  value={formData.ubicacion}
-                  onChange={(e) => handleChange("ubicacion", e.target.value)}
+            <Input
+              id="ubicacion"
+              value={formData.ubicacion}
+              onChange={(e) => handleChange("ubicacion", e.target.value)}
                   placeholder="Ej: Tegucigalpa, Honduras"
                   className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
-                />
+            />
               </div>
 
               <div className="space-y-2">
@@ -208,13 +208,13 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                   <IconClock className="w-4 h-4" />
                   Jornada *
                 </Label>
-                <Input
-                  id="jornada"
-                  value={formData.jornada}
-                  onChange={(e) => handleChange("jornada", e.target.value)}
+            <Input
+              id="jornada"
+              value={formData.jornada}
+              onChange={(e) => handleChange("jornada", e.target.value)}
                   placeholder="Ej: Lunes a Viernes"
                   className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
-                />
+            />
               </div>
 
               <div className="space-y-2">
@@ -236,16 +236,16 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                   <IconUserCheck className="w-4 h-4" />
                   Experiencia (años) *
                 </Label>
-                <Input
-                  id="experiencia_laboral"
-                  type="number"
-                  value={formData.experiencia_laboral}
-                  onChange={(e) =>
-                    handleChange("experiencia_laboral", Number(e.target.value))
-                  }
+            <Input
+              id="experiencia_laboral"
+              type="number"
+              value={formData.experiencia_laboral}
+              onChange={(e) =>
+                handleChange("experiencia_laboral", Number(e.target.value))
+              }
                   placeholder="2"
                   className="border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200"
-                />
+            />
               </div>
 
               <div className="space-y-2">
@@ -273,21 +273,21 @@ const TrabajoForm: React.FC<TrabajoFormProps> = ({ trabajo, onSave }) => {
                 <IconFileText className="w-5 h-5 text-orange-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800">Descripción del Puesto</h3>
-            </div>
-            
+        </div>
+
             <div className="space-y-2">
               <Label htmlFor="description" className="text-sm font-medium text-gray-700 flex items-center gap-2">
                 <IconFileText className="w-4 h-4" />
                 Descripción *
               </Label>
-              <Textarea
-                id="description"
-                value={formData.description}
-                onChange={(e) => handleChange("description", e.target.value)}
+          <Textarea
+            id="description"
+            value={formData.description}
+            onChange={(e) => handleChange("description", e.target.value)}
                 placeholder="Describe las responsabilidades, requisitos y beneficios del puesto..."
                 className="min-h-[120px] border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg transition-all duration-200 resize-none"
-              />
-            </div>
+          />
+        </div>
           </CardContent>
         </Card>
       </div>
