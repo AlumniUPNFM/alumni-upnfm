@@ -81,7 +81,8 @@ export default function Calendar() {
 
   return (
     <MainLayout hideMargin>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
+      {/* <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100"> */}
+      <div className="min-h-screen">
         <main className="max-w-7xl mx-auto p-6 font-montserrat">
           {/* Header Section */}
           <div className="mb-8">

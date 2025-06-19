@@ -16,7 +16,7 @@ import TitleFormacionContinua from "@/components/TitleFormacionContinua";
  */
 export default function FormacionContinua() {
   return (
-    <MainLayout>
+    <MainLayout hideMargin>
       <TitleFormacionContinua />
       <DesarrolloProfesional />
     </MainLayout>
