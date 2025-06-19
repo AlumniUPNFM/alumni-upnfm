@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export const FloatingContactButton = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [_, setIsHovered] = useState(false);
 
   return (
     <motion.div
