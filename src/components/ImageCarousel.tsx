@@ -31,10 +31,10 @@ const overlayText = "Bienvenido a la Red Alumni UPNFM - Conectando Egresados, Op
 
 const ImageCarousel: React.FC = () => {
   return (
-    <div className="relative w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
+    <div className="relative w-full h-64 md:h-96 lg:h-[450px] rounded-xl overflow-hidden shadow-lg">
       {/* Overlay text */}
       <div className="absolute z-20 w-full h-full flex items-center justify-center pointer-events-none">
-        <h2 className="text-white text-2xl md:text-3xl font-bold text-center drop-shadow-lg bg-black/40 px-6 py-3 rounded-xl animate-fade-in">
+        <h2 className="text-white xl:text-3xl font-bold text-center drop-shadow-lg px-6 py-3 rounded-xl animate-fade-in">
           {overlayText}
         </h2>
       </div>
@@ -46,15 +46,15 @@ const ImageCarousel: React.FC = () => {
         transitionDuration={900}
         showDots
         arrows={false}
-        containerClass="h-64 md:h-80"
-        itemClass="h-64 md:h-80"
+        containerClass="h-64 md:h-96 lg:h-[450px]"
+        itemClass="h-64 md:h-96 lg:h-[450px]"
         dotListClass="absolute bottom-4 w-full flex justify-center z-30"
         draggable
         swipeable
         renderDotsOutside={true}
       >
         {images.map((src, idx) => (
-          <div key={idx} className="w-full h-64 md:h-80 relative group">
+          <div key={idx} className="w-full h-64 md:h-96 lg:h-[450px] relative group">
             <img
               src={src}
               alt={`Carrusel ${idx + 1}`}
