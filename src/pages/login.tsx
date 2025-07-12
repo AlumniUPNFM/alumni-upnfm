@@ -19,6 +19,8 @@ import { Label } from "@/components/ui/label";
 import { setDataToSessionStorage } from "@/lib/alumni-session";
 import { ApiResponse } from "@/types/api-response";
 import { User } from "@/types/types";
+import Header from "@/components/Header";
+import MainLayout from "@/layouts/MainLayout";
 
 export default function Login() {
   const router = useRouter();
@@ -140,94 +142,97 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <Image
-            src="/logo.webp"
-            alt="Logo"
-            width={64}
-            height={64}
-            className="mx-auto mb-4"
-          />
-          <CardTitle className="text-2xl font-bold">Iniciar Sesión</CardTitle>
-          <CardDescription className="text-gray-600">
-            ¡Bienvenido a Alumni UPN! Registrate para ser parte de nosotros.
-          </CardDescription> {/*Tu plataforma de empleabilidad en línea.*/}
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="dni">DNI</Label>
-              <Input
-                id="dni"
-                type="text"
-                placeholder="0801999912345"
-                value={form.dni}
-                onChange={handleChange}
-                maxLength={13}
-                required
-                aria-invalid={error}
-              />
-            </div>
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="ejemplo@correo.com"
-                value={form.email}
-                onChange={handleChange}
-                required
-                aria-invalid={error}
-              />
-            </div>
-            <div>
-              <Label htmlFor="password">Contraseña</Label>
-              <Input
-                type="password"
-                id="password"
-                placeholder="******"
-                value={form.password}
-                onChange={handleChange}
-                required
-                aria-invalid={error}
-              />
-            </div>
-            {message && (
-              <p
-                className={`text-center text-sm ${
-                  error ? "text-red-600" : "text-green-600"
-                }`}
+    <MainLayout>
+      {/* <main className="min-h-screen flex items-center justify-center bg-gray-50 p-4"> */}
+      <main className="text-center">
+        <Card className="w-full max-w-md m-auto shadow-lg">
+          <CardHeader className="text-center">
+            <Image
+              src="/logo.webp"
+              alt="Logo"
+              width={64}
+              height={64}
+              className="mx-auto mb-4"
+            />
+            <CardTitle className="text-2xl font-bold">Iniciar Sesión</CardTitle>
+            <CardDescription className="text-gray-600">
+              ¡Bienvenido a Alumni UPN! Registrate para ser parte de nosotros.
+            </CardDescription> {/*Tu plataforma de empleabilidad en línea.*/}
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="dni">DNI</Label>
+                <Input
+                  id="dni"
+                  type="text"
+                  placeholder="0801999912345"
+                  value={form.dni}
+                  onChange={handleChange}
+                  maxLength={13}
+                  required
+                  aria-invalid={error}
+                />
+              </div>
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="ejemplo@correo.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  aria-invalid={error}
+                />
+              </div>
+              <div>
+                <Label htmlFor="password">Contraseña</Label>
+                <Input
+                  type="password"
+                  id="password"
+                  placeholder="******"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                  aria-invalid={error}
+                />
+              </div>
+              {message && (
+                <p
+                  className={`text-center text-sm ${
+                    error ? "text-red-600" : "text-green-600"
+                  }`}
+                >
+                  {message}
+                </p>
+              )}
+              <Button
+                type="submit"
+                className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-200"
+                disabled={loading}
               >
-                {message}
-              </p>
-            )}
-            <Button
-              type="submit"
-              className="w-full bg-primary text-white hover:bg-primary-dark transition-colors duration-200"
-              disabled={loading}
-            >
-              {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
-            </Button>
-            <Button
-              type="button"
-              variant="link"
-              className="w-full text-sm text-gray-600 hover:text-primary"
-              onClick={handleForgotPassword}
-              disabled={loading}
-            >
-              ¿Olvidaste tu contraseña?
-            </Button>
-          </form>
-          <p className="text-center text-sm mt-4">
-            ¿No tienes una cuenta?{" "}
-            <Link href="/register" className="text-primary hover:underline">
-              Regístrate aquí
-            </Link>
-          </p>
-        </CardContent>
-      </Card>
-    </main>
+                {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+              </Button>
+              <Button
+                type="button"
+                variant="link"
+                className="w-full text-sm text-gray-600 hover:text-primary"
+                onClick={handleForgotPassword}
+                disabled={loading}
+              >
+                ¿Olvidaste tu contraseña?
+              </Button>
+            </form>
+            <p className="text-center text-sm mt-4">
+              ¿No tienes una cuenta?{" "}
+              <Link href="/register" className="text-primary hover:underline">
+                Regístrate aquí
+              </Link>
+            </p>
+          </CardContent>
+        </Card>
+      </main>
+    </MainLayout>
   );
 }
