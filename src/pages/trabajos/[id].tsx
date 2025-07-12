@@ -141,9 +141,9 @@ export default function TrabajoDetail() {
             </div>
             <h3 className="text-xl font-semibold mt-6 mb-2 text-custom-green">Descripción</h3>
             <p className="text-gray-700 whitespace-pre-line">{trabajo.description}</p>
-            <Button className="mt-6 bg-primary text-white">
+            {/* <Button className="mt-6 bg-primary text-white">
               Aplicar ahora
-            </Button>
+            </Button> */}
           </div>
         </div>
       </section>

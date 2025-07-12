@@ -3,9 +3,10 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const images = [
-  "/carousel/1.jpg",
-  "/carousel/2.jpg",
-  "/carousel/3.jpg",
+  "/carousel/upnfm_1.jpeg",
+  "/carousel/upnfm_2.jpeg",
+  "/carousel/upnfm_3.jpeg",
+  "/carousel/upnfm_4.jpeg",
 ];
 
 const responsive = {
