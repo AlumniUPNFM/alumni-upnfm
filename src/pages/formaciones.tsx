@@ -54,6 +54,7 @@ export default function FormacionesMaintenance() {
         toast.success("Formación guardada correctamente");
         refresh();
       } else {
+        console.log(res);
         toast.error(`Error al guardar la formación: ${res.message}`);
       }
     } catch (error) {

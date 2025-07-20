@@ -101,10 +101,10 @@ export default function DesarrolloProfesionalItem({
 
           {/* Stats */}
           <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
-            <div className="flex items-center gap-1">
+            {/* <div className="flex items-center gap-1">
               <IconClock className="w-3 h-3" />
               <span>{formacionInfo.duration}</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-1">
               <IconUsers className="w-3 h-3" />
               <span>{formacionInfo.participants}</span>

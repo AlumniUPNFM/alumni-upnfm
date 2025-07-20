@@ -117,14 +117,15 @@ export default function FormacionDetail({ formacion }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {formacion.url}
+                {/* {formacion.url} */}
+                VER MÁS INFORMACIÓN
               </Link>
             </div>
           </div>
         )}
 
         {/* Información secundaria (ID, Created_at) */}
-        <div className="p-6 pt-0 text-xs text-gray-500 space-x-4">
+        {/* <div className="p-6 pt-0 text-xs text-gray-500 space-x-4">
           <span>ID: {formacion.id}</span>
           <span>
             Creado:{" "}
@@ -132,11 +133,11 @@ export default function FormacionDetail({ formacion }: Props) {
               ? dateToFormat(new Date(formacion.created_at))
               : "N/D"}
           </span>
-        </div>
+        </div> */}
       </main>
 
       {/* Pie de página */}
-      <footer className="flex-initial">
+      {/* <footer className="flex-initial">
         {formacion.url && (
           <div className="bg-gray-100 p-4 flex justify-end">
             <Link
@@ -149,7 +150,7 @@ export default function FormacionDetail({ formacion }: Props) {
             </Link>
           </div>
         )}
-      </footer>
+      </footer> */}
     </div>
   );
 }
