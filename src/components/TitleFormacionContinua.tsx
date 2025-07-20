@@ -57,15 +57,15 @@ export default function TitleFormacionContinua() {
         <div className="flex flex-wrap justify-center gap-8 mt-12">
           <div className="text-center">
             <div className="text-3xl font-bold text-custom-green mb-2">+50</div>
-            <div className="text-sm text-gray-600 uppercase tracking-wide">Programas Disponibles</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Programas<br></br>Disponibles</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-custom-green mb-2">100%</div>
-            <div className="text-sm text-gray-600 uppercase tracking-wide">Online</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Entrenamiento<br></br>Online</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-custom-green mb-2">24/7</div>
-            <div className="text-sm text-gray-600 uppercase tracking-wide">Acceso</div>
+            <div className="text-sm text-gray-600 uppercase tracking-wide">Acceso<br></br>Continuo</div>
           </div>
         </div>
       </div>
